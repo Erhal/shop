@@ -1,0 +1,90 @@
+.cart-btn {
+  position: relative; // CHECK // Проверить зачем он нужен
+}
+
+.cart-box {
+  position: absolute;
+  width: 360px;
+  min-height: 100px;
+  max-height: 500px;
+  top: 70px;
+  right: 15px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 4px 4px rgba(34, 60, 80, 0.2);
+  background-color: #fff;
+  overflow: auto;
+
+  .cart-box-empty {
+    margin-top: 20px;
+  }
+
+  .product-in-cart-box {
+    margin: 15px;
+    padding: 5px;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0px 0px 8px 4px rgba(34, 60, 80, 0.2);
+    position: relative;
+
+    img {
+      max-height: 90px;
+      max-width: 130px;
+      object-fit: contain;
+      padding: 5px;
+      margin-top: 5px;
+    }
+
+    .product-name {
+      font-size: 16px;
+    }
+
+    .price {
+      font-size: 14px;
+      color: gray;
+    }
+
+    .cart-item__qty {
+      align-items: center;
+      border: 1px solid #000;
+      border-radius: 28px;
+      display: flex;
+      height: 36px;
+      justify-content: space-between;
+      padding: 12px 18px;
+      width: 95px;
+      margin-left: 18%;
+    }
+
+    .product-quantity-input {
+      text-align: center;
+      width: 40px;
+      border: none;
+    }
+
+    .delete-card-btn {
+      position: absolute;
+      top: 10px;
+      right: 8px;
+    }
+  }
+
+  .total-cost {
+    background-color: #5B6369;
+    color: white;
+    cursor: default;
+    font-size: 16px;
+    margin: 20px 15px 0 15px;
+    padding: 10px;
+    text-align: center;
+    border-radius: 20px;
+  }
+
+  .open-cart-btn-holder {
+    display: flex;
+    justify-content: center;
+
+    button {
+      margin-bottom: 15px;
+    }
+  }
+}
