@@ -8,15 +8,12 @@ const Navbar = () => {
         const $overlay = document.querySelector('.overlay');
 
         $cartBox.classList.toggle('hidden');
-        $overlay.classList.toggle('hidden');
+        $overlay?.classList.toggle('hidden');
     }
     return (
         <>
             {/*  PUSH NOTIFICATIONS  */}
             <div className="toast-container position-fixed"></div>
-
-            {/*  OVERLAY  */}
-            <div className="overlay hidden" onClick={toggleCartVisibility}></div>
 
             {/* NAVBAR */}
             <nav className="navbar navbar-expand-lg navbar-light bg-light sticky-top">

@@ -24,14 +24,3 @@
     padding: 20px !important;
     border-radius: 15px !important;
 }
-
-.overlay {
-    position: fixed;
-    background-color: rgba(0, 0, 0, 0.6);
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 10% 0; /* CHECK проверить зачем оно нужно */
-    z-index: 1;
-}
