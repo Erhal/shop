@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState} from "react";
 import './style.scss';
 import {Route, Routes} from "react-router-dom";
 
@@ -8,12 +8,14 @@ import Smartphones from "./screens/Smartphones";
 import Laptops from "./screens/Laptops";
 
 function App() {
+    const [cartProducts, setCartProducts] = useState(0);
+
     return (
         <Routes>
-            <Route path="/" element={<Home/>}/>
-            <Route path="/all-products" element={<AllProducts/>}/>
-            <Route path="/smartphones" element={<Smartphones/>}/>
-            <Route path="/laptops" element={<Laptops/>}/>
+            <Route path="/" element={<Home {...{cartProducts, setCartProducts}}/>}/>
+            <Route path="/all-products" element={<AllProducts {...{cartProducts, setCartProducts}}/>}/>
+            <Route path="/smartphones" element={<Smartphones {...{cartProducts, setCartProducts}}/>}/>
+            <Route path="/laptops" element={<Laptops {...{cartProducts, setCartProducts}}/>}/>
             <Route path="*" element={<div>404</div>}/>
         </Routes>
     );
