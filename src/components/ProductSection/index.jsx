@@ -1,12 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import ProductCard from "../ProductCard";
+import SpinnerBorder from "../Spinners/SpinnerBorder";
 
 const ProductSection = ({numOfProducts, category}) => {
     const [products, setProducts] = useState([]);
 
     useEffect( () => {
         if (products.length === 0) {
-            fetch('https://dummyjson.com/products/')
+            fetch('https://dummyjson.com/products')
                 .then(response => response.json())
                 .then(data => data.products)
                 .then(allProducts => allProducts.filter(el => {
@@ -24,12 +25,10 @@ const ProductSection = ({numOfProducts, category}) => {
         <section className="py-5">
             <div className="container px-4 px-lg-5 mt-5">
                 <div className="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+
                     {products.length !== 0 ? products.map(product => <ProductCard product={product} key={product.id}/>) :
-                        <div className="d-flex justify-content-center mb-5">
-                            <div className="spinner-border" role="status" style={{width: '3rem', height: '3rem'}}>
-                                <span className="sr-only"></span>
-                            </div>
-                        </div>}
+                        <div className='mb-5'><SpinnerBorder/></div>}
+
                 </div>
             </div>
         </section>
