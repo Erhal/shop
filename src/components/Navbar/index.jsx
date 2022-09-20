@@ -1,15 +1,9 @@
 import React from 'react';
 import './style.css'
 import CartBox from "../CartBox";
+import {Link} from "react-router-dom";
 
 const Navbar = () => {
-    const toggleCartVisibility = () => {
-        const $cartBox = document.querySelector('.cart-box');
-        const $overlay = document.querySelector('.overlay');
-
-        $cartBox.classList.toggle('hidden');
-        $overlay?.classList.toggle('hidden');
-    }
     return (
         <>
             {/*  PUSH NOTIFICATIONS  */}
@@ -25,22 +19,21 @@ const Navbar = () => {
                     </button>
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                            <li className="nav-item"><a className="btn-home nav-link active" aria-current="page"
-                                                        href="#">Home</a></li>
+                            <li className="nav-item"><Link to={'/'} className="nav-link active">Home</Link></li>
                             <li className="nav-item dropdown">
-                                <a className="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
-                                   data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
+                                <div className="nav-link dropdown-toggle" id="navbarDropdown" role="button"
+                                   data-bs-toggle="dropdown" aria-expanded="false">Shop</div>
                                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a className="btn-all dropdown-item" href="#">All Products</a></li>
+                                    <li><Link to={'/all-products'} className="dropdown-item" >All Products</Link></li>
                                     <li>
                                         <hr className="dropdown-divider"/>
                                     </li>
-                                    <li><a className="btn-phones dropdown-item" href="#">Smartphones</a></li>
-                                    <li><a className="btn-laptops dropdown-item" href="#">Laptops</a></li>
+                                    <li><Link to={'/smartphones'} className="dropdown-item">Smartphones</Link></li>
+                                    <li><Link to={'/laptops'} className="dropdown-item">Laptops</Link></li>
                                 </ul>
                             </li>
                         </ul>
-                        <CartBox toggleCartVisibility={toggleCartVisibility}/>
+                        <CartBox/>
                     </div>
                 </div>
             </nav>

@@ -1,24 +1,30 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import './style.scss'
 
-const CartBox = (props) => {
+const CartBox = () => {
+    const cartBoxRef = useRef(null);
+    const overlayRef = useRef(null);
+
+    const toggleCartVisibility = () => {
+        cartBoxRef.current.classList.toggle('hidden');
+        overlayRef.current.classList.toggle('hidden');
+    }
+
     return (
         <>
-            {/*  OVERLAY  */}
-            <div className="overlay hidden" onClick={props.toggleCartVisibility}></div>
-
-            <form className="d-flex cart">
-                <button className="cart-btn btn btn-outline-dark" type="button" onClick={props.toggleCartVisibility}>
+            <div ref={overlayRef} className="overlay hidden" onClick={toggleCartVisibility}></div>
+            <form className="d-flex">
+                <button className="cart-btn btn btn-outline-dark" type="button" onClick={toggleCartVisibility}>
                     <i className="bi-cart-fill me-1"></i>
                     Cart
-                    <span className="cart-quantity-js badge bg-dark text-white ms-1 rounded-pill">0</span>
+                    <span className="badge bg-dark text-white ms-1 rounded-pill">0</span>
                 </button>
-                <div className="cart-box hidden">
+                <div ref={cartBoxRef} className="cart-box hidden">
                     <div className="cart-box-empty">
                         <h4 className="text-center m-3">Your cart is empty</h4>
                         <p className="text-center">But it's never too late to fix it :)</p>
                     </div>
-                    <div className="cart-box-holder-js">
+                    <div>
                         {/*  CART_BOX PRODUCTS WILL BE HERE  */}
                     </div>
                 </div>

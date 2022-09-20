@@ -1,19 +1,21 @@
 import React from "react";
-import '../node_modules/bootstrap/scss/bootstrap.scss';
-import './App.scss';
-import Navbar from './components/Navbar';
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import ProductSection from "./components/ProductSection";
+import './style.scss';
+import {Route, Routes} from "react-router-dom";
+
+import Home from "./screens/Home";
+import AllProducts from "./screens/AllProducts";
+import Smartphones from "./screens/Smartphones";
+import Laptops from "./screens/Laptops";
 
 function App() {
     return (
-        <>
-            <Navbar/>
-            <Header title={'Shop in Style'}/>
-            <ProductSection/>
-            <Footer copyright={'Copyright © 2022'}/>
-        </>
+        <Routes>
+            <Route path="/" element={<Home/>}/>
+            <Route path="/all-products" element={<AllProducts/>}/>
+            <Route path="/smartphones" element={<Smartphones/>}/>
+            <Route path="/laptops" element={<Laptops/>}/>
+            <Route path="*" element={<div>404</div>}/>
+        </Routes>
     );
 }
 
