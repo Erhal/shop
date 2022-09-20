@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import ProductCard from "../ProductCard";
 import SpinnerBorder from "../Spinners/SpinnerBorder";
 
-const ProductSection = ({numOfProducts, category}) => {
+const ProductsSection = ({numOfProducts, category}) => {
     const [products, setProducts] = useState([]);
 
     useEffect( () => {
@@ -35,4 +35,4 @@ const ProductSection = ({numOfProducts, category}) => {
     );
 };
 
-export default ProductSection;
+export default ProductsSection;

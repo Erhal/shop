@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from "../components/Navbar";
 import Header from "../components/Header";
-import ProductSection from "../components/ProductSection";
+import ProductsSection from "../components/ProductsSection";
 import Footer from "../components/Footer";
 
 const Laptops = ({cartProducts, serCartProducts}) => {
@@ -9,7 +9,7 @@ const Laptops = ({cartProducts, serCartProducts}) => {
         <>
             <Navbar/>
             <Header title={'Laptops'}/>
-            <ProductSection numOfProducts={Infinity} category={'laptops'}/>
+            <ProductsSection numOfProducts={Infinity} category={'laptops'}/>
             <Footer copyright={'Copyright © 2022'}/>
         </>
     );
