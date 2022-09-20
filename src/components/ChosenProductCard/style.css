@@ -1,0 +1,13 @@
+.chosen-product img {
+    max-height: 350px;
+    object-fit: contain;
+}
+
+.chosen-product .price {
+    color: gray;
+    font-size: 16px;
+}
+
+.chosen-product .discount-price {
+    color: green;
+}
