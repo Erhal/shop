@@ -1,10 +1,10 @@
 import React from 'react';
 
-const Footer = ({copyright}) => {
+const Footer = () => {
     return (
         <footer className="py-5 bg-dark">
             <div className="container">
-                <p className="m-0 text-center text-white">{copyright}</p>
+                <p className="m-0 text-center text-white">Copyright © 2022</p>
             </div>
         </footer>
     );
