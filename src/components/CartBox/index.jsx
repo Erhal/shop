@@ -46,8 +46,16 @@ const CartBox = () => {
                                         {cartProducts.map((product) => {
                                             return <CartProductCard key={product.id} product={product}/>
                                         })}
-                                        <div className="mb-4">
-                                            <h5 className="fw-normal mb-0 text-black">Total: ${getTotalPrice()}</h5>
+                                        <div className="row justify-content-between">
+                                            <div className="col-1"></div>
+                                            <div className="col-5 mb-4 d-flex align-items-center">
+                                                <h5 className="fw-normal mb-0 text-black">Total: ${getTotalPrice()}</h5>
+                                            </div>
+                                            <div className="col-5 mb-4 text-end">
+                                                <button className="btn btn-secondary btn-block" type="button">Checkout</button>
+                                            </div>
+                                            <div className="col-1"></div>
+
                                         </div>
                                     </div>
                                 </div>

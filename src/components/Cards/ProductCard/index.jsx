@@ -19,7 +19,6 @@ const ProductCard = ({product}) => {
         navigate(`/product/${product.id}`);
     }
 
-
     return (
         <div className="ProductCard col mb-5">
             <div className="card h-100 p-1">
@@ -31,7 +30,10 @@ const ProductCard = ({product}) => {
                     />
                     <div className="card-body p-3 pb-4">
                         <div className="text-center">
-                            <h5 className="fw-bolder product-name">{product.title}</h5>
+                            <h5 className="fw-bolder product-name">{product.title.split(`${product.brand} `)[1] || product.title}</h5>
+                            <div className='badge bg-secondary mx-auto mb-2'>
+                                <span>{product.brand.toLowerCase().split(/\s+/).map(word => word[0].toUpperCase() + word.substring(1)).join(' ')}</span>
+                            </div>
                             <div className="mb-2">
                                 <div className="d-flex justify-content-center small text-warning">
                                     <ProductRating product={product}/>
