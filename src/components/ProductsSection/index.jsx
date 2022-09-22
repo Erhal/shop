@@ -1,31 +1,15 @@
-import React, {useEffect, useState} from 'react';
-import ProductCard from "../ProductCard";
+import React, {useContext, useEffect} from 'react';
+import AppContext from "../../providers/AppContext";
+import ProductCard from "../Cards/ProductCard";
 import SpinnerBorder from "../Spinners/SpinnerBorder";
 
 const ProductsSection = ({numOfProducts, category, chosenProductID}) => {
-    const [products, setProducts] = useState([]);
 
-    useEffect( () => {
+    const {products, setProducts, fetchProducts} = useContext(AppContext);
+
+    useEffect(() => {
         setProducts([]);
-            fetch('https://dummyjson.com/products')
-                .then(response => response.json())
-                .then(data => data.products)
-                .then(allProducts => allProducts.filter(el => {
-                    if (category === 'all') {
-                        return el.category === 'smartphones' || el.category === 'laptops'
-                    } else {
-                        return el.category === category
-                    }
-                }))
-                .then(filteredProducts => filteredProducts.sort((a, b) => a.rating < b.rating ? 1 : -1))
-                .then(topProducts => {
-                    if (!chosenProductID) {
-                        setProducts(topProducts.splice(0, numOfProducts))
-                    } else {
-                        const filteredProducts = topProducts.filter(el => el.id !== chosenProductID);
-                        setProducts(filteredProducts.splice(0, numOfProducts))
-                    }
-                });
+        fetchProducts(numOfProducts, category, chosenProductID);
     }, [numOfProducts, category, chosenProductID]);
 
     return (

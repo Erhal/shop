@@ -4,7 +4,7 @@ import Header from "../components/Header";
 import ProductsSection from "../components/ProductsSection";
 import Footer from "../components/Footer";
 
-const Home = ({cartProducts, serCartProducts}) => {
+const Home = () => {
     return (
         <>
             <Navbar/>

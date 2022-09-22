@@ -1,11 +1,11 @@
 import React from 'react';
-import './style.css'
+import './style.scss'
 import CartBox from "../CartBox";
 import {Link} from "react-router-dom";
 
 const Navbar = () => {
     return (
-        <>
+        <span className="Navbar">
             {/*  PUSH NOTIFICATIONS  */}
             <div className="toast-container position-fixed"></div>
 
@@ -37,7 +37,7 @@ const Navbar = () => {
                     </div>
                 </div>
             </nav>
-        </>
+        </span>
     );
 };
 

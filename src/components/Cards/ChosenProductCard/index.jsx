@@ -1,16 +1,21 @@
-import React from 'react';
+import React, {useContext, useEffect, useRef} from 'react';
 import ProductRating from "../ProductRating";
 
-import './style.css'
+import './style.scss'
+import AppContext from "../../../providers/AppContext";
 
 const ChosenProductCard = ({product}) => {
 
-    const getDiscountPrice = () => {
-        return Math.round(product.price - (product.price * product.discountPercentage / 100));
-    }
+    const inputRef = useRef(null);
+    const addBtnRef = useRef(null);
+    const {addProduct, cartProducts, checkIfOutOfStock} = useContext(AppContext);
+
+    useEffect(() => {
+       checkIfOutOfStock(product, addBtnRef)
+    }, [cartProducts]);
 
     return (
-        <div className="container chosen-product px-4 px-lg-5 my-5">
+        <div className="ChosenProductCard container px-4 px-lg-5 my-5">
             <div className="row gx-4 gx-lg-5 align-items-center">
                 <div className="col-md-6">
                     <img
@@ -29,7 +34,7 @@ const ChosenProductCard = ({product}) => {
                         </div>
                     </div>
                     <div className="fs-5 mb-5">
-                        <span className="discount-price">${getDiscountPrice()}</span>
+                        <span className="discount-price">${product.discountPrice}</span>
                         <span className="price"> - <span
                             className='text-decoration-line-through'>${product.price}</span></span>
                     </div>
@@ -38,15 +43,23 @@ const ChosenProductCard = ({product}) => {
                     </p>
                     <div className="d-flex">
                         <input
+                            ref={inputRef}
                             className="form-control text-center me-3"
-                            type="num"
+                            type="number"
                             defaultValue={1}
                             style={{maxWidth: "3rem"}}
                         />
-                        <button className="btn btn-outline-dark flex-shrink-0" type="button">
+                        <div
+                            ref={addBtnRef}
+                            className="btn btn-outline-dark flex-shrink-0"
+                            type="button"
+                            onClick={() => {
+                                addProduct(product.id, inputRef.current.value, product.title);
+                                inputRef.current.value = 1;
+                            }}>
                             <i className="bi-cart-fill me-1"/>
                             Add to cart
-                        </button>
+                        </div>
                     </div>
                 </div>
             </div>

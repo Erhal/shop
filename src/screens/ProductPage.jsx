@@ -1,20 +1,19 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect} from 'react';
 import Navbar from "../components/Navbar";
 import Header from "../components/Header";
 import ProductsSection from "../components/ProductsSection";
 import Footer from "../components/Footer";
 import {useParams} from "react-router-dom";
-import ChosenProductCard from "../components/ChosenProductCard";
+import ChosenProductCard from "../components/Cards/ChosenProductCard";
+import AppContext from "../providers/AppContext";
 
 const ProductPage = () => {
-    const [chosenProduct, setChosenProduct] = useState({});
     const params = useParams();
+    const {chosenProduct, setChosenProduct, fetchChosenProduct} = useContext(AppContext);
 
     useEffect(() => {
         setChosenProduct({})
-        fetch(`https://dummyjson.com/products/${params.id}`)
-            .then(response => response.json())
-            .then(data => setChosenProduct(data))
+        fetchChosenProduct(params.id);
     }, [params]);
 
     return (
