@@ -20,7 +20,7 @@ const ProductCard = ({product}) => {
     }
 
     return (
-        <div className="ProductCard col mb-5">
+        <div className="ProductCard col mb-5 px-3">
             <div className="card h-100 p-1">
                 <div className='cursor-pointer' onClick={handleNavigate}>
                     <img

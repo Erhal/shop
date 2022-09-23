@@ -1,5 +1,6 @@
 import React, {createRef, useContext, useEffect} from 'react';
 import AppContext from "../../../providers/AppContext";
+import {useNavigate} from "react-router-dom";
 
 const CartProductCard = ({product}) => {
     const {
@@ -12,6 +13,12 @@ const CartProductCard = ({product}) => {
 
     const inputRef = createRef();
     const addBtnRef = createRef();
+
+    const navigate = useNavigate();
+
+    const handleNavigate = () => {
+        navigate(`/product/${product.id}`);
+    }
 
     useEffect(() => {
         inputRef.current.value = product.quantity;

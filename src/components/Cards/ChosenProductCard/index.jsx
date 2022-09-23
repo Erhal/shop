@@ -25,10 +25,11 @@ const ChosenProductCard = ({product}) => {
                     />
                 </div>
                 <div className="col-md-6">
-                    <h1 className="display-5 fw-bolder">
-                        {product.title.split(`${product.brand} `)[1] || product.title}
+                    <h1 className="display-4 fw-bolder">
+                        {/*{product.title.split(`${product.brand} `)[1] || product.title}*/}
+                        {product.title}
                     </h1>
-                    <h4>{product.brand.toLowerCase().split(/\s+/).map(word => word[0].toUpperCase() + word.substring(1)).join(' ')}</h4>
+                    {/*<h4>({product.brand.toLowerCase().split(/\s+/).map(word => word[0].toUpperCase() + word.substring(1)).join(' ')})</h4>*/}
                     <div className="mb-2">
                         <div className="d-flex small text-warning">
                             <ProductRating product={product}/>
