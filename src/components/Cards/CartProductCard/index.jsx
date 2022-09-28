@@ -82,7 +82,7 @@ const CartProductCard = ({product}) => {
                     <div className="col-5 text-center">
                         <h5 className="fw-normal mb-0">{product.title.split(`${product.brand} `)[1] || product.title}</h5>
                         <div className='badge text-secondary mb-1 mx-auto'>
-                            <span>({product.brand.toLowerCase().split(/\s+/).map(word => word[0].toUpperCase() + word.substring(1)).join(' ')})</span>
+                            <span>({product.brand.toLowerCase().split(/\s+/)?.map(word => word[0].toUpperCase() + word.substring(1)).join(' ')})</span>
                         </div>
                         <p className="mb-0 text-success">${getCartProductTotalPrice(product)}</p>
                     </div>

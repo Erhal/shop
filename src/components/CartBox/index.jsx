@@ -43,7 +43,7 @@ const CartBox = () => {
                                         <div className="mb-4">
                                             <h3 className="fw-normal mb-0 text-black">Shopping Cart</h3>
                                         </div>
-                                        {cartProducts.map((product) => {
+                                        {cartProducts?.map((product) => {
                                             return <CartProductCard key={product.id} product={product}/>
                                         })}
                                         <div className="row justify-content-between">
