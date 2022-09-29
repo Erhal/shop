@@ -8,7 +8,8 @@ const CartBoxProductCard = ({product}) => {
         setProductQuantity,
         getCartProductTotalPrice,
         deleteProduct,
-        checkIfOutOfStock
+        checkIfOutOfStock,
+        updateInputRef
     } = useContext(AppContext);
 
     const inputRef = createRef();
@@ -21,14 +22,8 @@ const CartBoxProductCard = ({product}) => {
     }
 
     useEffect(() => {
-        inputRef.current.value = product.quantity;
-        if (inputRef.current.value < 1) {
-            deleteProduct(product.id);
-        }
-    }, [cartProducts]);
-
-    useEffect(() => {
-        checkIfOutOfStock(product, addBtnRef)
+        checkIfOutOfStock(product, addBtnRef);
+        updateInputRef(inputRef, product);
     }, [cartProducts]);
 
     return (

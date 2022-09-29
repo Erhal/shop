@@ -118,6 +118,13 @@ const AppProvider = ({children}) => {
         }
     }
 
+    const updateInputRef = (inputRef, product) => {
+        inputRef.current.value = product.quantity;
+        if (inputRef.current.value < 1) {
+            deleteProduct(product.id);
+        }
+    }
+
     return (
         <AppContext.Provider value={{
             products,
@@ -133,7 +140,8 @@ const AppProvider = ({children}) => {
             getCartProductTotalPrice,
             getTotalQuantity,
             getTotalPrice,
-            checkIfOutOfStock
+            checkIfOutOfStock,
+            updateInputRef
         }}>
             {children}
         </AppContext.Provider>
