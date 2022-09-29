@@ -3,13 +3,64 @@ import AppContext from "./AppContext";
 import {toast} from "react-toastify";
 
 const AppProvider = ({children}) => {
+
+
+    /* STATES */
     const [products, setProducts] = useState([]);
     const [cartProducts, setCartProducts] = useState([]);
     const [chosenProduct, setChosenProduct] = useState({});
 
+
+    /* NOTIFICATIONS */
     const notifySuccess = (message) => toast.success(<div className='text-center text-dark'> {message} </div>);
     const notifyWarning = (message) => toast.warn(<div className='text-center text-dark'> {message} </div>);
 
+
+    /* FETCHES */
+    const fetchProducts = async (numOfProducts, category, chosenProductID) => {
+        try {
+            const response = await fetch('https://dummyjson.com/products');
+            const data = await response.json();
+            const allProducts = data.products;
+            const filteredProducts = allProducts.filter(el => {
+                if (category === 'all') {
+                    return el.category === 'smartphones' || el.category === 'laptops';
+                } else {
+                    return el.category === category;
+                }
+            });
+            const topProducts = filteredProducts.sort((a, b) => a.rating < b.rating ? 1 : -1)
+            if (!chosenProductID) {
+                topProducts.forEach((product) => {
+                    product.discountPrice = Math.round(product.price - (product.price * product.discountPercentage / 100));
+                });
+                setProducts(topProducts.splice(0, numOfProducts))
+            } else {
+                const filteredProducts = topProducts.filter(el => el.id !== chosenProductID);
+                filteredProducts.forEach((product) => {
+                    product.discountPrice = Math.round(product.price - (product.price * product.discountPercentage / 100));
+                });
+                setProducts(filteredProducts.splice(0, numOfProducts))
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    const fetchChosenProduct = async (id) => {
+        try {
+            const response = await fetch(`https://dummyjson.com/products/${id}`);
+            const product = await response.json();
+            product.discountPrice = Math.round(product.price - (product.price * product.discountPercentage / 100));
+            setChosenProduct(product);
+            return product;
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+
+    /* CART FUNCTIONALITY */
     const addProduct = async (id, addedQuantity, productTitle) => {
         if (!!cartProducts.find((product) => product.id === id)) {
             let cartProductsCopy = [...cartProducts];
@@ -64,48 +115,6 @@ const AppProvider = ({children}) => {
 
     const getTotalQuantity = () => {
         return cartProducts.reduce((acc, product) => acc + +product.quantity, 0);
-    }
-
-    const fetchProducts = async (numOfProducts, category, chosenProductID) => {
-        try {
-            const response = await fetch('https://dummyjson.com/products');
-            const data = await response.json();
-            const allProducts = data.products;
-            const filteredProducts = allProducts.filter(el => {
-                if (category === 'all') {
-                    return el.category === 'smartphones' || el.category === 'laptops';
-                } else {
-                    return el.category === category;
-                }
-            });
-            const topProducts = filteredProducts.sort((a, b) => a.rating < b.rating ? 1 : -1)
-            if (!chosenProductID) {
-                topProducts.forEach((product) => {
-                    product.discountPrice = Math.round(product.price - (product.price * product.discountPercentage / 100));
-                });
-                setProducts(topProducts.splice(0, numOfProducts))
-            } else {
-                const filteredProducts = topProducts.filter(el => el.id !== chosenProductID);
-                filteredProducts.forEach((product) => {
-                    product.discountPrice = Math.round(product.price - (product.price * product.discountPercentage / 100));
-                });
-                setProducts(filteredProducts.splice(0, numOfProducts))
-            }
-        } catch (e) {
-            console.log(e);
-        }
-    }
-
-    const fetchChosenProduct = async (id) => {
-        try {
-            const response = await fetch(`https://dummyjson.com/products/${id}`);
-            const product = await response.json();
-            product.discountPrice = Math.round(product.price - (product.price * product.discountPercentage / 100));
-            setChosenProduct(product);
-            return product;
-        } catch (e) {
-            console.log(e);
-        }
     }
 
     const checkIfOutOfStock = (product, addBtnRef) => {
