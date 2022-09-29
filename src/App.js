@@ -11,6 +11,7 @@ import ProductPage from "./screens/ProductPage";
 import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Layout from "./components/Layout";
+import Page404 from "./screens/Page404";
 
 function App() {
     return (
@@ -22,10 +23,9 @@ function App() {
                     <Route path="/smartphones" element={<Smartphones/>}/>
                     <Route path="/laptops" element={<Laptops/>}/>
                     <Route path="/product/:id" element={<ProductPage/>}/>
-                    //TODO: Добавить страницу 404
+                    <Route path="*" element={<Page404 title={'page'}/>}/>
                     //TODO: Добавить страницу с корзиной
                 </Route>
-                <Route path="*" element={<div>404</div>}/>
             </Routes>
 
             <div>
