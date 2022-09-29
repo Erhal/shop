@@ -22,9 +22,6 @@ const CartBoxProductCard = ({product}) => {
 
     useEffect(() => {
         inputRef.current.value = product.quantity;
-        if (inputRef.current.value > product.stock) {
-            inputRef.current.value = product.stock;
-        }
         if (inputRef.current.value < 1) {
             deleteProduct(product.id);
         }
@@ -70,8 +67,7 @@ const CartBoxProductCard = ({product}) => {
                                 setProductQuantity(product.id, inputRef.current.value);
                                 inputRef.current.blur();
                             }}
-                            max={product.stock}
-                            min={1}
+                            min={0}
                             className="form-control form-control-sm text-center"
                         />
                         <div ref={addBtnRef} className='cursor-pointer ms-1'
