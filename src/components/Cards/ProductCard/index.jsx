@@ -2,12 +2,11 @@ import React, {createRef, useContext, useEffect} from 'react';
 import {useNavigate} from "react-router-dom";
 
 import './style.scss'
-import ProductRating from "../ProductRating";
 import AppContext from "../../../providers/AppContext";
 
 const ProductCard = ({product}) => {
 
-    const {addProduct, cartProducts, checkIfOutOfStock} = useContext(AppContext);
+    const {addProduct, cartProducts, getProductRating, checkIfOutOfStock} = useContext(AppContext);
     const navigate = useNavigate();
     const addBtnRef = createRef();
 
@@ -36,7 +35,7 @@ const ProductCard = ({product}) => {
                             </div>
                             <div className="mb-2">
                                 <div className="d-flex justify-content-center small text-warning">
-                                    <ProductRating product={product}/>
+                                    {getProductRating(product.rating)}
                                 </div>
                             </div>
                             <span className="discount-price">${product.discountPrice}</span><span

@@ -1,5 +1,4 @@
 import React, {useContext, useEffect, useRef} from 'react';
-import ProductRating from "../ProductRating";
 
 import './style.scss'
 import AppContext from "../../../providers/AppContext";
@@ -8,7 +7,7 @@ const ChosenProductCard = ({product}) => {
 
     const inputRef = useRef(null);
     const addBtnRef = useRef(null);
-    const {addProduct, cartProducts, checkIfOutOfStock} = useContext(AppContext);
+    const {addProduct, cartProducts, getProductRating, checkIfOutOfStock} = useContext(AppContext);
 
     useEffect(() => {
        checkIfOutOfStock(product, addBtnRef)
@@ -34,7 +33,7 @@ const ChosenProductCard = ({product}) => {
                     {/*TODO: check*/}
                     <div className="mb-2">
                         <div className="d-flex small text-warning">
-                            <ProductRating product={product}/>
+                            {getProductRating(product.rating)}
                         </div>
                     </div>
                     <div className="fs-5 mb-5">
@@ -42,9 +41,7 @@ const ChosenProductCard = ({product}) => {
                         <span className="price"> - <span
                             className='text-decoration-line-through'>${product.price}</span></span>
                     </div>
-                    <p className="lead">
-                        {product.description}
-                    </p>
+                    <p className="lead">{product.description}</p>
                     <div className="d-flex">
                         <input
                             ref={inputRef}
