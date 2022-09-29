@@ -33,17 +33,17 @@ const AppProvider = ({children}) => {
                 }
             });
             const topProducts = filteredProducts.sort((a, b) => a.rating < b.rating ? 1 : -1)
-            if (!chosenProductID) {
-                topProducts.forEach((product) => {
-                    product.discountPrice = Math.round(product.price - (product.price * product.discountPercentage / 100));
-                });
-                setProducts(topProducts.splice(0, numOfProducts))
-            } else {
+            if (chosenProductID) {
                 const filteredProducts = topProducts.filter(el => el.id !== chosenProductID);
                 filteredProducts.forEach((product) => {
                     product.discountPrice = Math.round(product.price - (product.price * product.discountPercentage / 100));
                 });
                 setProducts(filteredProducts.splice(0, numOfProducts))
+            } else {
+                topProducts.forEach((product) => {
+                    product.discountPrice = Math.round(product.price - (product.price * product.discountPercentage / 100));
+                });
+                setProducts(topProducts.splice(0, numOfProducts))
             }
         } catch (e) {
             console.log(e);
