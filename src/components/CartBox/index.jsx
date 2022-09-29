@@ -10,7 +10,7 @@ const CartBox = () => {
     const cartBoxRef = useRef(null);
     const overlayRef = useRef(null);
 
-    const toggleCartVisibility = () => {
+    const toggleCartBoxVisibility = () => {
         cartBoxRef.current.classList.toggle('hidden');
         overlayRef.current.classList.toggle('hidden');
     }
@@ -21,9 +21,9 @@ const CartBox = () => {
 
     return (
         <span className='CartBox'>
-            <div ref={overlayRef} className="overlay hidden" onClick={toggleCartVisibility}></div>
+            <div ref={overlayRef} className="overlay hidden" onClick={toggleCartBoxVisibility}></div>
             <form className="d-flex">
-                <button className="cart-btn btn btn-outline-dark" type="button" onClick={toggleCartVisibility}>
+                <button className="cart-btn btn btn-outline-dark" type="button" onClick={toggleCartBoxVisibility}>
                     <i className="bi-cart-fill me-1"></i>
                     Cart
                     <span className="badge bg-dark text-white ms-1 rounded-pill">{totalQuantity}</span>

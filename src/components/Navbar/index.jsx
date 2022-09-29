@@ -6,10 +6,6 @@ import {Link} from "react-router-dom";
 const Navbar = () => {
     return (
         <span className="Navbar">
-            {/*  PUSH NOTIFICATIONS  */}
-            <div className="toast-container position-fixed"></div>
-
-            {/* NAVBAR */}
             <nav className="navbar navbar-expand-lg navbar-light bg-light sticky-top">
                 <div className="container px-4 px-lg-5"><span className="navbar-brand">Shop</span>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -22,9 +18,9 @@ const Navbar = () => {
                             <li className="nav-item"><Link to={'/'} className="nav-link active">Home</Link></li>
                             <li className="nav-item dropdown">
                                 <div className="nav-link dropdown-toggle" id="navbarDropdown" role="button"
-                                   data-bs-toggle="dropdown" aria-expanded="false">Shop</div>
+                                     data-bs-toggle="dropdown" aria-expanded="false">Shop</div>
                                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><Link to={'/all-products'} className="dropdown-item" >All Products</Link></li>
+                                    <li><Link to={'/all-products'} className="dropdown-item">All Products</Link></li>
                                     <li>
                                         <hr className="dropdown-divider"/>
                                     </li>
