@@ -36,12 +36,12 @@ const AppProvider = ({children}) => {
             if (chosenProductID) {
                 const filteredProducts = topProducts.filter(el => el.id !== chosenProductID);
                 filteredProducts.forEach((product) => {
-                    product.discountPrice = Math.round(product.price - (product.price * product.discountPercentage / 100));
+                    product.discountPrice = getDiscountPrice(product);
                 });
                 setProducts(filteredProducts.splice(0, numOfProducts))
             } else {
                 topProducts.forEach((product) => {
-                    product.discountPrice = Math.round(product.price - (product.price * product.discountPercentage / 100));
+                    product.discountPrice = getDiscountPrice(product);
                 });
                 setProducts(topProducts.splice(0, numOfProducts))
             }
@@ -54,7 +54,7 @@ const AppProvider = ({children}) => {
         try {
             const response = await fetch(`https://dummyjson.com/products/${id}`);
             const product = await response.json();
-            product.discountPrice = Math.round(product.price - (product.price * product.discountPercentage / 100));
+            product.discountPrice = getDiscountPrice(product);
             setChosenProduct(product);
             return product;
         } catch (e) {
@@ -82,9 +82,7 @@ const AppProvider = ({children}) => {
         }
     }
 
-    const deleteProduct = (id) => {
-        setCartProducts(cartProducts.filter((product) => product.id !== id));
-    }
+    const deleteProduct = (id) => setCartProducts(cartProducts.filter((product) => product.id !== id));
 
     const setProductQuantity = (id, quantity) => {
         if (!!cartProducts.find((product) => product.id === id)) {
@@ -117,9 +115,9 @@ const AppProvider = ({children}) => {
         return totalPrice.toString().replace(/(\d{1,3}(?=(?:\d\d\d)+(?!\d)))/g, "$1" + separator);;;
     }
 
-    const getTotalQuantity = () => {
-        return cartProducts.reduce((acc, product) => acc + +product.quantity, 0);
-    }
+    const getDiscountPrice = (product) => Math.round(product.price - (product.price * product.discountPercentage / 100));
+
+    const getTotalQuantity = () => cartProducts.reduce((acc, product) => acc + +product.quantity, 0);
 
     const checkIfOutOfStock = (product, addBtnRef) => {
         if (cartProducts.find((cartProduct) => cartProduct.id === product.id)?.quantity === product.stock) {
