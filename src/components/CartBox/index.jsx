@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useRef, useState} from 'react';
 import './style.scss'
-import CartProductCard from "../Cards/CartProductCard";
+import CartBoxProductCard from "../Cards/CartBoxProductCard";
 import AppContext from "../../providers/AppContext";
 
 const CartBox = () => {
@@ -44,7 +44,7 @@ const CartBox = () => {
                                             <h3 className="fw-normal mb-0 text-black">Shopping Cart</h3>
                                         </div>
                                         {cartProducts?.map((product) => {
-                                            return <CartProductCard key={product.id} product={product}/>
+                                            return <CartBoxProductCard key={product.id} product={product}/>
                                         })}
                                         <div className="row justify-content-between">
                                             <div className="col-1"></div>

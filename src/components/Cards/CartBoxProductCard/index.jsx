@@ -2,7 +2,7 @@ import React, {createRef, useContext, useEffect} from 'react';
 import AppContext from "../../../providers/AppContext";
 import {useNavigate} from "react-router-dom";
 
-const CartProductCard = ({product}) => {
+const CartBoxProductCard = ({product}) => {
     const {
         cartProducts,
         setProductQuantity,
@@ -92,4 +92,4 @@ const CartProductCard = ({product}) => {
     );
 };
 
-export default CartProductCard;
+export default CartBoxProductCard;
