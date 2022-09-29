@@ -22,6 +22,8 @@ function App() {
                     <Route path="/smartphones" element={<Smartphones/>}/>
                     <Route path="/laptops" element={<Laptops/>}/>
                     <Route path="/product/:id" element={<ProductPage/>}/>
+                    //TODO: Добавить страницу 404
+                    //TODO: Добавить страницу с корзиной
                 </Route>
                 <Route path="*" element={<div>404</div>}/>
             </Routes>

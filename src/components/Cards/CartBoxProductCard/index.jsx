@@ -16,7 +16,7 @@ const CartBoxProductCard = ({product}) => {
 
     const navigate = useNavigate();
 
-    const handleNavigate = () => {
+    const handleNavigate = () => { //TODO: 1. Добавить переход на страницу товара
         navigate(`/product/${product.id}`);
     }
 
