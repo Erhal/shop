@@ -6,17 +6,20 @@ const AppProvider = ({children}) => {
 
 
     /* STATES */
+
     const [products, setProducts] = useState([]);
     const [cartProducts, setCartProducts] = useState([]);
     const [chosenProduct, setChosenProduct] = useState({});
 
 
     /* NOTIFICATIONS */
+
     const notifySuccess = (message) => toast.success(<div className='text-center text-dark'> {message} </div>);
     const notifyWarning = (message) => toast.warn(<div className='text-center text-dark'> {message} </div>);
 
 
     /* FETCHES */
+
     const fetchProducts = async (numOfProducts, category, chosenProductID) => {
         try {
             const response = await fetch('https://dummyjson.com/products');
@@ -61,6 +64,7 @@ const AppProvider = ({children}) => {
 
 
     /* CART FUNCTIONALITY */
+
     const addProduct = async (id, addedQuantity, productTitle) => {
         if (!!cartProducts.find((product) => product.id === id)) {
             let cartProductsCopy = [...cartProducts];
