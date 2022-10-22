@@ -1,5 +1,3 @@
-import './style.scss'
-
 const SpinnerBorder = () => {
     return (
         <div className='residual-height d-flex justify-content-center align-items-center'>
