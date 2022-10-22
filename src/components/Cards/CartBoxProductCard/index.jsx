@@ -39,8 +39,8 @@ const CartBoxProductCard = ({product}) => {
                             className="rounded-3"
                             alt={product.title}
                             style={{
-                                maxWidth: "85px",
-                                maxHeight: "85px",
+                                maxWidth: "90px",
+                                maxHeight: "90px",
                             }}
                         />
                     </div>
@@ -71,7 +71,7 @@ const CartBoxProductCard = ({product}) => {
                         </div>
                     </div>
                     <div className="col-5 text-center">
-                        <h5 className="fw-normal mb-0">{product.title.split(`${product.brand} `)[1] || product.title}</h5>
+                        <h6 className="fw-normal mb-0 fw-semibold">{product.title.split(`${product.brand} `)[1] || product.title}</h6>
                         <div className='badge text-secondary mb-1 mx-auto'>
                             <span>({product.brand.toLowerCase().split(/\s+/)?.map(word => word[0].toUpperCase() + word.substring(1)).join(' ')})</span>
                         </div>

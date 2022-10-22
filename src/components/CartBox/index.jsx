@@ -32,14 +32,14 @@ const CartBox = () => {
                 <div ref={cartBoxRef} className="cart-box hidden">
 
                     {cartProducts.length === 0 ?
-                        <div className="cart-box-empty mb-5">
-                            <h4 className="text-center display-6 m-3">Your cart is empty</h4>
-                            <h5 className="text-center">But it's never too late to fix it :)</h5>
+                        <div className="cart-box-empty text-center">
+                            <span className="text-center display-6">Your cart is empty</span><br/>
+                            <span className="text-center">But it's never too late to fix it :)</span>
                         </div>
                         :
                         <section className="h-100" style={{backgroundColor: "#eee"}}>
                             <div className="container h-100 pt-4">
-                                <div className="row d-flex justify-content-center align-items-center h-100">
+                                <div className="row justify-content-center h-100">
                                     <div className="col-11">
                                         <div className="mb-4">
                                             <h3 className="fw-normal mb-0 text-black">Shopping Cart</h3>
@@ -50,11 +50,11 @@ const CartBox = () => {
                                         <div className="row justify-content-between">
                                             <div className="col-1"></div>
                                             <div className="col-5 mb-4 d-flex align-items-center">
-                                                <h5 className="fw-normal mb-0 text-black">Total: ${getTotalPrice()}</h5>
+                                                <h5 className="fw-normal mb-0 text-black">Subtotal: ${getTotalPrice()}</h5>
                                             </div>
                                             <div className="col-5 mb-4 text-end">
                                                 <Link to={'/cart'}>
-                                                    <button className="btn btn-secondary btn-block" type="button">Open Cart</button>
+                                                    <button className="btn btn-secondary btn-block" type="button">View Cart</button>
                                                 </Link>
                                             </div>
                                             <div className="col-1"></div>
