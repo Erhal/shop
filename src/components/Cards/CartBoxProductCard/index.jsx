@@ -1,4 +1,4 @@
-import React, {createRef, useContext, useEffect} from 'react';
+import {createRef, useContext, useEffect} from 'react';
 import AppContext from "../../../providers/AppContext";
 import {useNavigate} from "react-router-dom";
 

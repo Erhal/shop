@@ -1,4 +1,4 @@
-import React, {createRef, useContext, useEffect} from 'react';
+import {createRef, useContext, useEffect} from 'react';
 import {useNavigate} from "react-router-dom";
 
 import './style.scss'

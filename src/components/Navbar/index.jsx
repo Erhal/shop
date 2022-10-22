@@ -1,4 +1,3 @@
-import React from 'react';
 import './style.scss'
 import CartBox from "../CartBox";
 import {Link} from "react-router-dom";

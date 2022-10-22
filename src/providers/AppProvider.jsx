@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import {useState} from "react";
 import AppContext from "./AppContext";
 import {toast} from "react-toastify";
 

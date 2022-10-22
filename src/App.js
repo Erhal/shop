@@ -1,5 +1,3 @@
-import React from "react";
-import './style.scss';
 import {Route, Routes} from "react-router-dom";
 
 import Home from "./screens/Home";

@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from 'react';
+import {useContext, useEffect} from 'react';
 import AppContext from "../../providers/AppContext";
 import ProductCard from "../Cards/ProductCard";
 import SpinnerBorder from "../Spinners/SpinnerBorder";

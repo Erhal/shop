@@ -1,5 +1,3 @@
-import React from 'react';
-
 const Header = ({title}) => {
     return (
         <header className="bg-dark py-5">

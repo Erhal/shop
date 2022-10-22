@@ -1,6 +1,4 @@
-import React from 'react';
-
-const Page404 = ({title}) => {
+const Page404 = () => {
     return (
         <div className="d-flex align-items-center justify-content-center" style={{height: '75vh'}}>
             <div className="text-center">
