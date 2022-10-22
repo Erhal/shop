@@ -16,6 +16,7 @@ const AppProvider = ({children}) => {
 
     const notifySuccess = (message) => toast.success(<div className='text-center text-dark'> {message} </div>);
     const notifyWarning = (message) => toast.warn(<div className='text-center text-dark'> {message} </div>);
+    //TODO: Добавить уведомление об удалении продукта
 
 
     /* FETCHES */
