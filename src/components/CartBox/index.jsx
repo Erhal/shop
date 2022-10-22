@@ -2,6 +2,7 @@ import {useContext, useEffect, useRef, useState} from 'react';
 import './style.scss'
 import CartBoxProductCard from "../Cards/CartBoxProductCard";
 import AppContext from "../../providers/AppContext";
+import {Link} from "react-router-dom";
 
 const CartBox = () => {
 
@@ -20,7 +21,7 @@ const CartBox = () => {
     }, [cartProducts])
 
     return (
-        <span className='CartBox'>
+        <div className='CartBox'>
             <div ref={overlayRef} className="overlay hidden" onClick={toggleCartBoxVisibility}></div>
             <form className="d-flex">
                 <button className="cart-btn btn btn-outline-dark" type="button" onClick={toggleCartBoxVisibility}>
@@ -52,7 +53,9 @@ const CartBox = () => {
                                                 <h5 className="fw-normal mb-0 text-black">Total: ${getTotalPrice()}</h5>
                                             </div>
                                             <div className="col-5 mb-4 text-end">
-                                                <button className="btn btn-secondary btn-block" type="button">Checkout</button>
+                                                <Link to={'/cart'}>
+                                                    <button className="btn btn-secondary btn-block" type="button">Open Cart</button>
+                                                </Link>
                                             </div>
                                             <div className="col-1"></div>
 
@@ -64,7 +67,7 @@ const CartBox = () => {
                     }
                 </div>
             </form>
-        </span>
+        </div>
     );
 };
 

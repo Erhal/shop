@@ -18,6 +18,10 @@ const routes = [
         Screen: Screens.ProductPage
     },
     {
+        path: '/cart',
+        Screen: Screens.CartPage
+    },
+    {
         path: '*',
         Screen: Screens.Page404
     }
