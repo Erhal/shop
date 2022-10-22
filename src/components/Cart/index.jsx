@@ -1,19 +1,41 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import AppContext from "../../providers/AppContext";
+import CartProductCard from "../Cards/CartProductCard";
+import ProductsSection from "../ProductsSection";
+import {useNavigate} from "react-router-dom";
 
 const Cart = () => {
     const {cartProducts, getTotalQuantity, getTotalPrice} = useContext(AppContext);
     const [totalQuantity, setTotalQuantity] = useState(getTotalQuantity())
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (cartProducts.length === 0) navigate('/');
+    }, [cartProducts]);
 
     return (
-        <div className='Cart'>
-            {cartProducts.length === 0 ?
-                <div className="cart-box-empty">
-                    <h4 className="text-center display-6 m-3">Your cart is empty</h4>
-                    <h5 className="text-center">But it's never too late to fix it :)</h5>
+        <>
+            <div className='Cart d-flex justify-content-center my-5'>
+                {cartProducts.length > 0 &&
+                    <>
+                        {cartProducts?.map((product) => {
+                            return <CartProductCard key={product.id} product={product}/>
+                        })}
+                    </>
+                }
+            </div>
+
+            <div className='recommended'>
+                <div className="container">
+                    <div className="row">
+                        <div className="col-12">
+                            <h2 className="text-center">Recommended for you</h2>
+                        </div>
+                    </div>
                 </div>
-                : 'В корзине есть продукты'}
-        </div>
+            </div>
+            <ProductsSection category='all' numOfProducts='4'/>
+        </>
     );
 };
 
