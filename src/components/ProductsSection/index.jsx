@@ -18,7 +18,7 @@ const ProductsSection = ({numOfProducts, category, chosenProductID}) => {
                 <div className="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
 
                     {!products.length && <div className='mb-5'><SpinnerBorder/></div>}
-                    {!!products.length && products.map(product => <ProductCard product={product} key={product.id}/>)}
+                    {!!products.length && products.map(product => <ProductCard product={product} key={`productCard-${product.id}`}/>)}
 
                 </div>
             </div>
