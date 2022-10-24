@@ -1,8 +1,9 @@
 import {useContext, useEffect, useRef, useState} from 'react';
-import './style.scss'
-import CartBoxProductCard from "../Cards/CartBoxProductCard";
+import CartProductCard from "../Cards/CartProductCard";
 import AppContext from "../../providers/AppContext";
 import {Link} from "react-router-dom";
+
+import './style.scss'
 
 const CartBox = () => {
 
@@ -44,9 +45,7 @@ const CartBox = () => {
                                         <div className="mb-4">
                                             <h3 className="fw-normal mb-0 text-black">Shopping Cart</h3>
                                         </div>
-                                        {cartProducts?.map((product) => {
-                                            return <CartBoxProductCard key={product.id} product={product}/>
-                                        })}
+                                        {cartProducts?.map((product) => <CartProductCard key={product.id} product={product}/>)}
                                         <div className="row justify-content-between">
                                             <div className="col-1"></div>
                                             <div className="col-5 mb-4 d-flex align-items-center">
@@ -54,11 +53,10 @@ const CartBox = () => {
                                             </div>
                                             <div className="col-5 mb-4 text-end">
                                                 <Link to={'/cart'}>
-                                                    <button className="btn btn-secondary btn-block" type="button">View Cart</button>
+                                                    <button className="btn btn-secondary btn-block" type="button" onClick={toggleCartBoxVisibility}>View Cart</button>
                                                 </Link>
                                             </div>
                                             <div className="col-1"></div>
-
                                         </div>
                                     </div>
                                 </div>
