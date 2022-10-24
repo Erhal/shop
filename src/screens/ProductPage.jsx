@@ -22,7 +22,7 @@ const ProductPage = () => {
 
     return (
         <>
-            <Header title={'Product Page'}/>
+            <Header/>
             {chosenProduct.id && <ChosenProductCard product={chosenProduct}/>}
             <ProductsSection numOfProducts={3} category={chosenProduct.category} chosenProductID={chosenProduct.id}/>
         </>
