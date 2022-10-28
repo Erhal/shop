@@ -1,6 +1,8 @@
-import './style.scss'
-import CartBox from "../CartBox";
 import {Link} from "react-router-dom";
+
+import CartBox from "../CartBox";
+
+import './style.scss'
 
 const Navbar = () => {
     return (

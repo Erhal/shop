@@ -1,6 +1,6 @@
-import {createRef, useContext, useEffect} from "react";
-import AppContext from "../../../providers/AppContext";
+import {useContext} from "react";
 import CartProductCardInput from "./CartProductCardInput";
+import AppContext from "../../../providers/AppContext";
 
 const CartProductCard = ({product}) => {
     const {getCartProductTotalPrice, deleteProduct} = useContext(AppContext);

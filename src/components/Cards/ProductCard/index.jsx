@@ -1,8 +1,9 @@
 import {createRef, useContext, useEffect} from 'react';
 import {useNavigate} from "react-router-dom";
 
-import './style.scss'
 import AppContext from "../../../providers/AppContext";
+
+import './style.scss';
 
 const ProductCard = ({product}) => {
 

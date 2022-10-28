@@ -1,7 +1,8 @@
 import {useContext, useEffect, useRef} from 'react';
 
-import './style.scss'
 import AppContext from "../../../providers/AppContext";
+
+import './style.scss';
 
 const ChosenProductCard = ({product}) => {
 
@@ -10,7 +11,7 @@ const ChosenProductCard = ({product}) => {
     const {addProduct, cartProducts, getProductRating, checkIfOutOfStock} = useContext(AppContext);
 
     useEffect(() => {
-       checkIfOutOfStock(product, addBtnRef)
+        checkIfOutOfStock(product, addBtnRef)
     }, [cartProducts]);
 
     return (
@@ -25,12 +26,8 @@ const ChosenProductCard = ({product}) => {
                 </div>
                 <div className="col-md-6">
                     <h1 className="display-4 fw-bolder">
-                        {/*{product.title.split(`${product.brand} `)[1] || product.title}*/}
-                        {/*TODO: check*/}
                         {product.title}
                     </h1>
-                    {/*<h4>({product.brand.toLowerCase().split(/\s+/).map(word => word[0].toUpperCase() + word.substring(1)).join(' ')})</h4>*/}
-                    {/*TODO: check*/}
                     <div className="mb-2">
                         <div className="d-flex small text-warning">
                             {getProductRating(product.rating)}

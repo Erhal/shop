@@ -1,6 +1,7 @@
 import {useContext, useEffect} from 'react';
 import {Link, useNavigate} from "react-router-dom";
 import {toast} from "react-toastify";
+
 import AppContext from "../../providers/AppContext";
 
 import CartProductCard from "../Cards/CartProductCard";
