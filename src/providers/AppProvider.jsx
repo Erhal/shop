@@ -1,6 +1,6 @@
 import {useState} from "react";
-import AppContext from "./AppContext";
 import {toast} from "react-toastify";
+import AppContext from "./AppContext";
 
 const AppProvider = ({children}) => {
 
