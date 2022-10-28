@@ -8,11 +8,9 @@
     right: 0;
     z-index: 1;
   }
- //TODO: Сделать меньше размер шрифта названия товара
   .cart-box {
     position: absolute;
     width: 450px;
-    min-height: 150px;
     max-height: 500px;
     top: 70px;
     right: 15px;
@@ -21,9 +19,5 @@
     background-color: #fff;
     overflow: auto;
     z-index: 1;
-
-    .cart-box-empty {
-      margin-top: 40px;
-    }
   }
 }

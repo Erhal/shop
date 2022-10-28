@@ -33,9 +33,9 @@ const CartBox = () => {
                 <div ref={cartBoxRef} className="cart-box hidden">
 
                     {cartProducts.length === 0 ?
-                        <div className="cart-box-empty text-center">
-                            <span className="text-center display-6">Your cart is empty</span><br/>
-                            <span className="text-center">But it's never too late to fix it :)</span>
+                            <div className="d-flex flex-column text-center my-5">
+                            <div className="display-6">Your cart is empty</div>
+                            <div>But it's never too late to fix it :)</div>
                         </div>
                         :
                         <section className="h-100" style={{backgroundColor: "#eee"}}>
