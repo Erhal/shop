@@ -117,7 +117,7 @@ const AppProvider = ({children}) => {
 
     const getDiscountPrice = (product) => Math.round(product.price - (product.price * product.discountPercentage / 100));
 
-    const getTotalQuantity = () => cartProducts.reduce((acc, product) => acc + +product.quantity, 0);
+    const getCartProductsQuantity = () => cartProducts.reduce((acc, product) => acc + +product.quantity, 0);
 
     const getProductRating = (rating) => {
         let stars = [];
@@ -173,7 +173,7 @@ const AppProvider = ({children}) => {
             deleteProduct,
             setProductQuantity,
             getCartProductTotalPrice,
-            getTotalQuantity,
+            getCartProductsQuantity,
             getProductRating,
             getTotalPrice,
             checkIfOutOfStock,
