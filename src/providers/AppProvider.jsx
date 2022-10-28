@@ -16,7 +16,6 @@ const AppProvider = ({children}) => {
 
     const notifySuccess = (message) => toast.success(<div className='text-center text-dark'> {message} </div>);
     const notifyWarning = (message) => toast.warn(<div className='text-center text-dark'> {message} </div>);
-    //TODO: Добавить уведомление об удалении продукта
 
 
     /* FETCHES */
@@ -104,7 +103,7 @@ const AppProvider = ({children}) => {
         }
         let cartProductTotalPrice = (product.quantity * product.price).toString();
         let separator = ",";
-        return cartProductTotalPrice.replace(/(\d{1,3}(?=(?:\d\d\d)+(?!\d)))/g, "$1" + separator);;
+        return cartProductTotalPrice.replace(/(\d{1,3}(?=(?:\d\d\d)+(?!\d)))/g, "$1" + separator);
     }
 
     const getTotalPrice = () => {
@@ -113,7 +112,7 @@ const AppProvider = ({children}) => {
         cartProducts.forEach((product) => {
             totalPrice += +getCartProductTotalPrice(product).replace(separator, '');
         });
-        return totalPrice.toString().replace(/(\d{1,3}(?=(?:\d\d\d)+(?!\d)))/g, "$1" + separator);;;
+        return totalPrice.toString().replace(/(\d{1,3}(?=(?:\d\d\d)+(?!\d)))/g, "$1" + separator);
     }
 
     const getDiscountPrice = (product) => Math.round(product.price - (product.price * product.discountPercentage / 100));
