@@ -20,7 +20,7 @@ const AppProvider = ({children}) => {
 
     /* FETCHES */
 
-    const fetchProducts = async (numOfProducts, category, chosenProductID) => {
+    const fetchProducts = async (numOfProducts, category, productsIDsToFilter) => {
         try {
             const response = await fetch('https://dummyjson.com/products');
             const data = await response.json();
@@ -33,8 +33,8 @@ const AppProvider = ({children}) => {
                 }
             });
             const topProducts = filteredProducts.sort((a, b) => a.rating < b.rating ? 1 : -1)
-            if (chosenProductID) {
-                const filteredProducts = topProducts.filter(el => el.id !== chosenProductID);
+            if (productsIDsToFilter) {
+                const filteredProducts = topProducts.filter(el => !productsIDsToFilter.includes(el.id));
                 filteredProducts.forEach((product) => {
                     product.discountPrice = getDiscountPrice(product);
                 });

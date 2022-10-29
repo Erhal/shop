@@ -1,4 +1,4 @@
-import {useContext, useEffect} from 'react';
+import {useContext, useEffect, useState} from 'react';
 import {Link, useNavigate} from "react-router-dom";
 import {toast} from "react-toastify";
 
@@ -10,12 +10,15 @@ import ProductsSection from "../ProductsSection";
 const Cart = () => {
     const notifyInfo = (message) => toast.info(<div className='text-center text-dark'> {message} </div>);
     const {cartProducts, getTotalPrice} = useContext(AppContext);
+    const [cartProductsIDs, setCartProductsIDs] = useState([]);
     const navigate = useNavigate();
 
     useEffect(() => {
         if (cartProducts.length === 0) {
             navigate('/');
             notifyInfo('Your cart is empty.');
+        } else {
+            setCartProductsIDs(cartProducts.map(el => el.id));
         }
     }, [cartProducts]);
 
@@ -45,7 +48,7 @@ const Cart = () => {
                     </div>
                 </div>
             </div>
-            <ProductsSection category='all' numOfProducts='4'/>
+            <ProductsSection category={'all'} numOfProducts={4} productsIDsToFilter={cartProductsIDs}/>
         </>
     );
 };

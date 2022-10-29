@@ -1,4 +1,4 @@
-import {useContext, useEffect} from 'react';
+import {useContext, useEffect, useState} from 'react';
 import Header from "../components/Header";
 import ProductsSection from "../components/ProductsSection";
 import {useNavigate, useParams} from "react-router-dom";
@@ -7,12 +7,14 @@ import AppContext from "../providers/AppContext";
 
 const ProductPage = () => {
 
+    const [chosenProductID, setChosenProductID] = useState([null]);
     const params = useParams();
     const {chosenProduct, setChosenProduct, fetchChosenProduct} = useContext(AppContext);
     const navigate = useNavigate();
 
     useEffect(() => {
         setChosenProduct({})
+        setChosenProductID([+params.id]);
         fetchChosenProduct(params.id);
     }, [params]);
 
@@ -24,7 +26,7 @@ const ProductPage = () => {
         <>
             <Header/>
             {chosenProduct.id && <ChosenProductCard product={chosenProduct}/>}
-            <ProductsSection numOfProducts={3} category={chosenProduct.category} chosenProductID={chosenProduct.id}/>
+            <ProductsSection numOfProducts={3} category={chosenProduct.category} productsIDsToFilter={chosenProductID}/>
         </>
     );
 };

@@ -5,14 +5,14 @@ import SpinnerBorder from "../Spinners/SpinnerBorder";
 
 import AppContext from "../../providers/AppContext";
 
-const ProductsSection = ({numOfProducts, category, chosenProductID}) => {
+const ProductsSection = ({numOfProducts, category, productsIDsToFilter}) => {
 
     const {products, setProducts, fetchProducts} = useContext(AppContext);
 
     useEffect(() => {
         setProducts([]);
-        fetchProducts(numOfProducts, category, chosenProductID);
-    }, [numOfProducts, category, chosenProductID]);
+        fetchProducts(numOfProducts, category, productsIDsToFilter);
+    }, [numOfProducts, category, productsIDsToFilter]);
 
     return (
         <section className="py-5">

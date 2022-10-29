@@ -18,10 +18,10 @@ const CartBoxFull = ({ toggleCartBoxVisibility }) => {
                         {cartProducts?.map((product) => <CartProductCard key={product.id} product={product}/>)}
                         <div className="row justify-content-between">
                             <div className="col-1"></div>
-                            <div className="col-5 mb-4 d-flex align-items-center">
+                            <div className="col-6 mb-4 d-flex align-items-center">
                                 <h5 className="fw-normal mb-0 text-black">Subtotal: ${getTotalPrice()}</h5>
                             </div>
-                            <div className="col-5 mb-4 text-end">
+                            <div className="col-4 mb-4 text-end">
                                 <Link to={'/cart'}>
                                     <button className="btn btn-secondary btn-block" type="button" onClick={toggleCartBoxVisibility}>View Cart</button>
                                 </Link>
