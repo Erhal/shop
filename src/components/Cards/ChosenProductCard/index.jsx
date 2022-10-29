@@ -8,7 +8,7 @@ const ChosenProductCard = ({product}) => {
 
     const inputRef = useRef(null);
     const addBtnRef = useRef(null);
-    const {addProduct, cartProducts, getProductRating, checkIfOutOfStock} = useContext(AppContext);
+    const {cartProducts, getProductRating, checkIfOutOfStock, addChosenProductToCart} = useContext(AppContext);
 
     useEffect(() => {
         checkIfOutOfStock(product, addBtnRef)
@@ -45,15 +45,19 @@ const ChosenProductCard = ({product}) => {
                             className="form-control text-center me-3"
                             type="number"
                             defaultValue={1}
+                            min={1}
                             style={{maxWidth: "3rem"}}
+                            onFocus={() => inputRef.current.select()}
+                            onKeyDown={(e) => {
+                                if (e.key === 'Enter') addChosenProductToCart(product, inputRef)
+                            }}
                         />
                         <div
                             ref={addBtnRef}
                             className="btn btn-outline-dark flex-shrink-0"
                             type="button"
                             onClick={() => {
-                                addProduct(product.id, inputRef.current.value, product.title);
-                                inputRef.current.value = 1;
+                                addChosenProductToCart(product, inputRef)
                             }}>
                             <i className="bi-cart-fill me-1"/>
                             Add to cart

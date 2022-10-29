@@ -82,6 +82,11 @@ const AppProvider = ({children}) => {
         }
     }
 
+    const addChosenProductToCart = (product, inputRef) => {
+        addProduct(product.id, inputRef.current.value, product.title);
+        inputRef.current.value = 1;
+    };
+
     const deleteProduct = (id) => setCartProducts(cartProducts.filter((product) => product.id !== id));
 
     const setProductQuantity = (id, quantity) => {
@@ -170,6 +175,7 @@ const AppProvider = ({children}) => {
             fetchProducts,
             fetchChosenProduct,
             addProduct,
+            addChosenProductToCart,
             deleteProduct,
             setProductQuantity,
             getCartProductTotalPrice,
