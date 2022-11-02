@@ -11,7 +11,7 @@ const ChosenProductCard = ({product}) => {
     const {cartProducts, getProductRating, checkIfOutOfStock, addChosenProductToCart} = useContext(AppContext);
 
     useEffect(() => {
-        checkIfOutOfStock(product, addBtnRef)
+        checkIfOutOfStock(product, addBtnRef, inputRef)
     }, [cartProducts]);
 
     return (
@@ -55,10 +55,10 @@ const ChosenProductCard = ({product}) => {
                         <div
                             ref={addBtnRef}
                             className="btn btn-outline-dark flex-shrink-0"
-                            type="button"
                             onClick={() => {
                                 addChosenProductToCart(product, inputRef)
-                            }}>
+                            }}
+                        >
                             <i className="bi-cart-fill me-1"/>
                             Add to cart
                         </div>
