@@ -1,9 +1,9 @@
 //TODO: запрос на сервер при изменении корзины
 import {createSlice} from "@reduxjs/toolkit";
-import addSeparator from "../../helpers/addSeparator";
+import addPriceSeparator from "../../helpers/addPriceSeparator";
 
 const initialState = {
-    cart: {products: [], totalQuantity: 0, totalPrice: 0},
+    cart: { products: [], totalQuantity: 0, totalPrice: 0 },
 }
 
 export const cartSlice = createSlice({
@@ -14,25 +14,25 @@ export const cartSlice = createSlice({
             state.cart.totalQuantity = state.cart.products.reduce((acc, product) => acc + +product.quantity, 0);
         },
         updateCartTotalPrice: (state) => {
-            state.cart.totalPrice = addSeparator(state.cart.products.reduce((acc, product) => acc + +product.quantity * +product.discountPrice, 0))
+            state.cart.totalPrice = addPriceSeparator(state.cart.products.reduce((acc, product) => acc + +product.quantity * +product.discountPrice, 0))
         },
-        addProductToCart: (state, {payload}) => {
-            if (state.cart.products.some(product => product.id === payload.product.id)) {
-                state.cart.products.find(product => product.id === payload.product.id).quantity += payload.quantity;
+        addProductToCart: (state, { payload: {product, quantity} }) => {
+            if (state.cart.products.some(el => el.id === product.id)) {
+                state.cart.products.find(el => el.id === product.id).quantity += +quantity;
             } else {
-                let addedProduct = {...payload.product, quantity: +payload.quantity};
+                let addedProduct = { ...product, quantity: +quantity };
                 state.cart.products.push(addedProduct);
             }
         },
-        removeProductFromCart: (state, {payload}) => {
-            state.cart.products = state.cart.products.filter(product => product.id !== payload);
+        removeProductFromCart: (state, { payload: {id} }) => {
+            state.cart.products = state.cart.products.filter(product => product.id !== id);
         },
-        changeProductQuantity: (state, {payload}) => {
-            state.cart.products.find(product => product.id === payload.id).quantity = +payload.quantity;
+        changeProductQuantity: (state, { payload: {id, quantity} }) => {
+            state.cart.products.find(el => el.id === id).quantity = +quantity;
         }
     }
 });
 
-export const {updateCartTotalQuantity, updateCartTotalPrice, addProductToCart, removeProductFromCart, changeProductQuantity} = cartSlice.actions;
+export const { updateCartTotalQuantity, updateCartTotalPrice, addProductToCart, removeProductFromCart, changeProductQuantity } = cartSlice.actions;
 
 export default cartSlice.reducer;

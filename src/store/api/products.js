@@ -7,7 +7,7 @@ export const productsApi = createApi({
     ),
     endpoints: (builder) => ({
         getAllProducts: builder.query({
-            query: () => 'products',
+            query: (category) => category === 'all' ? 'products' : `products/category/${category}`,
             transformResponse: (response) => {
                 return response.products
                     .filter(product => product.category === 'smartphones' || product.category === 'laptops')
@@ -19,9 +19,16 @@ export const productsApi = createApi({
                         }
                     })
             }
+        }),
+        getChosenProduct: builder.query({
+            query: (id) => `products/${id}`,
+            transformResponse: (product) => {
+                product.discountPrice = Math.round(product.price - (product.price * product.discountPercentage / 100));
+                return product;
+            }
         })
     })
 })
 
-export const {useGetAllProductsQuery} = productsApi;
+export const {useGetAllProductsQuery, useGetChosenProductQuery} = productsApi;
 export default productsApi;

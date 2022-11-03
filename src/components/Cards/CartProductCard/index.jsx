@@ -1,16 +1,20 @@
 import CartProductCardInput from "./CartProductCardInput";
 import {useDispatch} from "react-redux";
 import {removeProductFromCart} from "../../../store/slices/cart";
-import addSeparator from "../../../helpers/addSeparator";
+import addPriceSeparator from "../../../helpers/addPriceSeparator";
 
 const CartProductCard = ({product}) => {
     const dispatch = useDispatch();
+
+    const handleRemoveProductFromCart = () => {
+        dispatch(removeProductFromCart({id: product.id}))
+    }
 
     return (
         <div className="card rounded-3 mb-4">
             <div className="card-body p-4">
                 <div className='position-absolute text-secondary top-0 end-0 mt-1 me-1'>
-                    <i className="bi bi-trash" role="button" onClick={() => dispatch(removeProductFromCart(product.id))}></i>
+                    <i className="bi bi-trash" role="button" onClick={handleRemoveProductFromCart}></i>
                 </div>
                 <div className="row d-flex justify-content-between align-items-center" style={{height: '80px'}}>
                     <div className="col-4 text-center">
@@ -30,7 +34,7 @@ const CartProductCard = ({product}) => {
                         <div className='badge text-secondary mb-1 mx-auto'>
                             <span>({product.brand.toLowerCase().split(/\s+/)?.map(word => word[0].toUpperCase() + word.substring(1)).join(' ')})</span>
                         </div>
-                        <p className="mb-0 text-success">${addSeparator(product.discountPrice * product.quantity)}</p>
+                        <p className="mb-0 text-success">${addPriceSeparator(product.discountPrice * product.quantity)}</p>
                     </div>
                 </div>
             </div>

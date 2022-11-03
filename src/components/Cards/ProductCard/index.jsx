@@ -1,30 +1,33 @@
-import {createRef, useEffect} from 'react';
+import {useEffect, useRef} from 'react';
 import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {addProductToCart} from "../../../store/slices/cart";
-import {toast} from "react-toastify";
 import checkIfOutOfStock from "../../../helpers/checkIfOutOfStock";
 import getProductRating from "../../../helpers/getProductRating";
-
-
 import './style.scss';
+import {addProductToCart} from "../../../store/slices/cart";
+import {toast} from "react-toastify";
 
 const ProductCard = ({product}) => {
 
     const {cart} = useSelector(state => state.cart);
 
-    const notifySuccess = (message) => toast.success(<div className='text-center text-dark'> {message} </div>);
-
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const addBtnRef = createRef();
+    const addBtnRef = useRef();
+
+    const notifySuccess = (message) => toast.success(<div className='text-center text-dark'> {message} </div>);
 
     useEffect(() => {
         checkIfOutOfStock(cart, product, addBtnRef);
-    }, [cart]);
+    }, [cart, product])
 
     const handleNavigate = () => {
         navigate(`/product/${product.id}`);
+    }
+
+    const handleAddProductToCart = () => {
+        dispatch(addProductToCart({product, quantity: 1}));
+        notifySuccess(`${product.title} added to cart`);
     }
 
     return (
@@ -55,10 +58,7 @@ const ProductCard = ({product}) => {
                 <div className="card-footer text-center pb-4 pt-2 border-top-0 bg-transparent">
                     <div className="btn btn-outline-dark mt-auto"
                          ref={addBtnRef}
-                         onClick={() => {
-                             dispatch(addProductToCart({product, quantity: 1}));
-                             notifySuccess(`${product.title} added to cart`);
-                         }}
+                         onClick={() => handleAddProductToCart(product)}
                     >
                         Add to cart
                     </div>

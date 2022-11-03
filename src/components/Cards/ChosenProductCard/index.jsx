@@ -1,16 +1,33 @@
-import {useContext, useEffect, useRef} from 'react';
-
-
+import {useEffect, useRef} from 'react';
+import {useDispatch, useSelector} from "react-redux";
+import {addProductToCart} from "../../../store/slices/cart";
+import checkIfOutOfStock from "../../../helpers/checkIfOutOfStock";
+import getProductRating from "../../../helpers/getProductRating";
 import './style.scss';
+import {toast} from "react-toastify";
 
-const ChosenProductCard = ({product}) => {
+const ChosenProductCard = ({ product }) => {
 
-    const inputRef = useRef(null);
-    const addBtnRef = useRef(null);
+    const {cart} = useSelector(state => state.cart);
 
-    // useEffect(() => {
-    //     checkIfOutOfStock(product, addBtnRef, inputRef)
-    // }, [cartProducts]);
+    const inputRef = useRef();
+    const addBtnRef = useRef();
+    const dispatch = useDispatch();
+
+    const notifySuccess = (message) => toast.success(<div className='text-center text-dark'> {message} </div>);
+
+    const handleAddProductToCart = () => {
+        const quantity = inputRef.current.value;
+        inputRef.current.value = 1;
+
+        dispatch(addProductToCart({ product, quantity }))
+        notifySuccess(`${product.title} added to cart`);
+
+    }
+
+    useEffect(() => {
+        checkIfOutOfStock(cart, product, addBtnRef, inputRef)
+    }, [cart, product])
 
     return (
         <div className="ChosenProductCard container px-4 px-lg-5 my-5">
@@ -24,11 +41,14 @@ const ChosenProductCard = ({product}) => {
                 </div>
                 <div className="col-md-6">
                     <h1 className="display-4 fw-bolder">
-                        {product.title}
+                        {product.title.split(`${product.brand} `)[1] || product.title}
                     </h1>
+                    <div className='badge bg-secondary mx-auto mb-2'>
+                        <span>{product.brand.toLowerCase().split(/\s+/).map(word => word[0].toUpperCase() + word.substring(1)).join(' ')}</span>
+                    </div>
                     <div className="mb-2">
                         <div className="d-flex small text-warning">
-                            {/*{getProductRating(product.rating)}*/}
+                            {getProductRating(product.rating)}
                         </div>
                     </div>
                     <div className="fs-5 mb-5">
@@ -44,18 +64,20 @@ const ChosenProductCard = ({product}) => {
                             type="number"
                             defaultValue={1}
                             min={1}
-                            style={{maxWidth: "3rem"}}
+                            style={{maxWidth: "3.5rem"}}
                             onFocus={() => inputRef.current.select()}
                             onKeyDown={(e) => {
-                                // if (e.key === 'Enter') addChosenProductToCart(product, inputRef)
+                                if (e.key === 'Enter') {
+                                    handleAddProductToCart();
+                                    inputRef.current.blur();
+                                }
+                                if (inputRef.current.value.length > 2) inputRef.current.value = inputRef.current.value = ''
                             }}
                         />
                         <div
                             ref={addBtnRef}
                             className="btn btn-outline-dark flex-shrink-0"
-                            onClick={() => {
-                                // addChosenProductToCart(product, inputRef)
-                            }}
+                            onClick={handleAddProductToCart}
                         >
                             <i className="bi-cart-fill me-1"/>
                             Add to cart

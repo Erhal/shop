@@ -17,10 +17,10 @@ const routes = [
         path: '/product/:id',
         Screen: Screens.ProductPage
     },
-    // {
-    //     path: '/cart',
-    //     Screen: Screens.CartPage
-    // },
+    {
+        path: '/cart',
+        Screen: Screens.CartPage
+    },
     {
         path: '*',
         Screen: Screens.Page404

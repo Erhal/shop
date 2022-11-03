@@ -3,6 +3,7 @@ import productsApi from "../api/products";
 
 const initialState = {
     products: [],
+    chosenProduct: {},
 }
 
 export const productsSlice = createSlice({
@@ -15,8 +16,14 @@ export const productsSlice = createSlice({
             (state, {payload}) => {
                 state.products = payload
             }
-        )
-    }
+        );
+        builder.addMatcher(
+            productsApi.endpoints.getChosenProduct.matchFulfilled,
+            (state, {payload}) => {
+                state.chosenProduct = payload
+            }
+        );
+    },
 });
 
 export const {} = productsSlice.actions;

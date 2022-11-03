@@ -1,4 +1,4 @@
-const checkIfOutOfStock = (cart, product, addBtnRef, inputRef) => {
+const checkIfOutOfStock = ( cart, product, addBtnRef, inputRef ) => {
     if (cart.products.find((cartProduct) => cartProduct.id === product.id)?.quantity === product.stock) {
         addBtnRef.current.classList.add('disabled');
         inputRef?.current.classList.add('disabled');
