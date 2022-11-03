@@ -16,8 +16,12 @@ body {
   cursor: pointer;
 }
 
+.residual-height__product-page {
+  height: calc(100vh - 320px);
+}
+
 .residual-height {
-  height: calc(100vh - 531.2px);
+  height: calc(100vh - 435.2px);
 }
 
 .mx-30pc {

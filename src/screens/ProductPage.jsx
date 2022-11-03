@@ -3,6 +3,7 @@ import Header from "../components/Header";
 import ProductsSection from "../components/ProductsSection";
 import {useNavigate, useParams} from "react-router-dom";
 import ChosenProductCard from "../components/Cards/ChosenProductCard";
+import SpinnerBorder from "../components/Spinners/SpinnerBorder";
 import AppContext from "../providers/AppContext";
 
 const ProductPage = () => {
@@ -25,8 +26,9 @@ const ProductPage = () => {
     return (
         <>
             <Header/>
+            {!chosenProduct.id && <div className='d-flex justify-content-center align-items-center residual-height__product-page'><SpinnerBorder/></div>}
             {chosenProduct.id && <ChosenProductCard product={chosenProduct}/>}
-            <ProductsSection numOfProducts={3} category={chosenProduct.category} productsIDsToFilter={chosenProductID}/>
+            {chosenProduct.id && <ProductsSection numOfProducts={3} category={chosenProduct.category} productsIDsToFilter={chosenProductID}/>}
         </>
     );
 };
