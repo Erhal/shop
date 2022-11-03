@@ -1,19 +1,27 @@
-import {createRef, useContext, useEffect} from 'react';
+import {createRef, useEffect} from 'react';
 import {useNavigate} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {addProductToCart} from "../../../store/slices/cart";
+import {toast} from "react-toastify";
+import checkIfOutOfStock from "../../../helpers/checkIfOutOfStock";
+import getProductRating from "../../../helpers/getProductRating";
 
-import AppContext from "../../../providers/AppContext";
 
 import './style.scss';
 
 const ProductCard = ({product}) => {
 
-    const {addProduct, cartProducts, getProductRating, checkIfOutOfStock} = useContext(AppContext);
+    const {cart} = useSelector(state => state.cart);
+
+    const notifySuccess = (message) => toast.success(<div className='text-center text-dark'> {message} </div>);
+
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const addBtnRef = createRef();
 
     useEffect(() => {
-        checkIfOutOfStock(product, addBtnRef);
-    }, [cartProducts]);
+        checkIfOutOfStock(cart, product, addBtnRef);
+    }, [cart]);
 
     const handleNavigate = () => {
         navigate(`/product/${product.id}`);
@@ -25,7 +33,7 @@ const ProductCard = ({product}) => {
                 <div className='cursor-pointer' onClick={handleNavigate}>
                     <img
                         className="card-img-top"
-                        src={product.images[0]}
+                        src={product.thumbnail}
                         alt={product.title}
                     />
                     <div className="card-body p-3 pb-4">
@@ -45,8 +53,13 @@ const ProductCard = ({product}) => {
                     </div>
                 </div>
                 <div className="card-footer text-center pb-4 pt-2 border-top-0 bg-transparent">
-                    <div ref={addBtnRef} className="btn btn-outline-dark mt-auto"
-                         onClick={() => addProduct(product.id, 1, product.title)}>
+                    <div className="btn btn-outline-dark mt-auto"
+                         ref={addBtnRef}
+                         onClick={() => {
+                             dispatch(addProductToCart({product, quantity: 1}));
+                             notifySuccess(`${product.title} added to cart`);
+                         }}
+                    >
                         Add to cart
                     </div>
                 </div>

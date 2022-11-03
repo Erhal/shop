@@ -1,11 +1,10 @@
 import {Link} from "react-router-dom";
 
 import CartProductCard from "../Cards/CartProductCard";
-import {useContext} from "react";
-import AppContext from "../../providers/AppContext";
+import {useSelector} from "react-redux";
 
 const CartBoxFull = ({ toggleCartBoxVisibility }) => {
-    const {cartProducts, getTotalPrice} = useContext(AppContext);
+    const {cart} = useSelector(state => state.cart);
 
     return (
         <section className="h-100" style={{backgroundColor: "#eee"}}>
@@ -15,11 +14,11 @@ const CartBoxFull = ({ toggleCartBoxVisibility }) => {
                         <div className="mb-4">
                             <h3 className="fw-normal mb-0 text-black">Shopping Cart</h3>
                         </div>
-                        {cartProducts?.map((product) => <CartProductCard key={product.id} product={product}/>)}
+                        {cart.products.map((product) => <CartProductCard key={product.id} product={product}/>)}
                         <div className="row justify-content-between">
                             <div className="col-1"></div>
                             <div className="col-6 mb-4 d-flex align-items-center">
-                                <h5 className="fw-normal mb-0 text-black">Subtotal: ${getTotalPrice()}</h5>
+                                <h5 className="fw-normal mb-0 text-black">Subtotal: ${cart.totalPrice}</h5>
                             </div>
                             <div className="col-4 mb-4 text-end">
                                 <Link to={'/cart'}>

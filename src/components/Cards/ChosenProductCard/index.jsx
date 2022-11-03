@@ -1,6 +1,5 @@
 import {useContext, useEffect, useRef} from 'react';
 
-import AppContext from "../../../providers/AppContext";
 
 import './style.scss';
 
@@ -8,11 +7,10 @@ const ChosenProductCard = ({product}) => {
 
     const inputRef = useRef(null);
     const addBtnRef = useRef(null);
-    const {cartProducts, getProductRating, checkIfOutOfStock, addChosenProductToCart} = useContext(AppContext);
 
-    useEffect(() => {
-        checkIfOutOfStock(product, addBtnRef, inputRef)
-    }, [cartProducts]);
+    // useEffect(() => {
+    //     checkIfOutOfStock(product, addBtnRef, inputRef)
+    // }, [cartProducts]);
 
     return (
         <div className="ChosenProductCard container px-4 px-lg-5 my-5">
@@ -20,7 +18,7 @@ const ChosenProductCard = ({product}) => {
                 <div className="col-md-6">
                     <img
                         className="card-img-top mb-5 mb-md-0"
-                        src={product.images[0]}
+                        src={product.thumbnail}
                         alt={product.title}
                     />
                 </div>
@@ -30,7 +28,7 @@ const ChosenProductCard = ({product}) => {
                     </h1>
                     <div className="mb-2">
                         <div className="d-flex small text-warning">
-                            {getProductRating(product.rating)}
+                            {/*{getProductRating(product.rating)}*/}
                         </div>
                     </div>
                     <div className="fs-5 mb-5">
@@ -49,14 +47,14 @@ const ChosenProductCard = ({product}) => {
                             style={{maxWidth: "3rem"}}
                             onFocus={() => inputRef.current.select()}
                             onKeyDown={(e) => {
-                                if (e.key === 'Enter') addChosenProductToCart(product, inputRef)
+                                // if (e.key === 'Enter') addChosenProductToCart(product, inputRef)
                             }}
                         />
                         <div
                             ref={addBtnRef}
                             className="btn btn-outline-dark flex-shrink-0"
                             onClick={() => {
-                                addChosenProductToCart(product, inputRef)
+                                // addChosenProductToCart(product, inputRef)
                             }}
                         >
                             <i className="bi-cart-fill me-1"/>
