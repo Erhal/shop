@@ -71,7 +71,6 @@ const ChosenProductCard = ({ product }) => {
                                     handleAddProductToCart();
                                     inputRef.current.blur();
                                 }
-                                if (inputRef.current.value.length > 2) inputRef.current.value = inputRef.current.value = ''
                             }}
                         />
                         <div

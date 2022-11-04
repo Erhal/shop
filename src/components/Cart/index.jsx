@@ -10,6 +10,7 @@ const Cart = () => {
     const notifyInfo = (message) => toast.info(<div className='text-center text-dark'> {message} </div>);
 
     const {cart} = useSelector(state => state.cart);
+    const {products} = useSelector(state => state.products);
     const [cartProductsIDs, setCartProductsIDs] = useState([]);
     const navigate = useNavigate();
 
@@ -45,6 +46,11 @@ const Cart = () => {
                 <div className="row">
                     <div className="col-12">
                         <h2 className="text-center">Recommended for you</h2>
+                        {cartProductsIDs.length === products.length &&
+                            <div className="text-center mt-5">
+                                <span className='fs-5'>Wow, we have no more products!</span>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>

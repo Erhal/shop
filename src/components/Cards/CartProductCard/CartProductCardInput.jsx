@@ -2,31 +2,24 @@ import {useEffect, useRef} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {changeProductQuantity, removeProductFromCart} from "../../../store/slices/cart";
 import checkIfOutOfStock from "../../../helpers/checkIfOutOfStock";
-import {toast} from "react-toastify";
 
 const CartProductCardInput = ({product}) => {
     const {cart} = useSelector(state => state.cart);
-
-    const notifyWarning = (message) => toast.warn(<div className='text-center text-dark'> {message} </div>);
 
     const dispatch = useDispatch();
     const inputRef = useRef(null);
     const addBtnRef = useRef(null);
 
     const handleChangeProductQuantity = (quantity) => {
-        dispatch(changeProductQuantity({id: product.id, quantity}))
+        dispatch(changeProductQuantity({product, quantity, inputRef}));
     }
 
     useEffect(() => {
-        inputRef.current.value = product.quantity;
         checkIfOutOfStock(cart, product, addBtnRef);
+        inputRef.current.value = product.quantity;
     }, [cart]);
 
     useEffect(() => {
-        if (product.quantity > product.stock) {
-            dispatch(changeProductQuantity({id: product.id, quantity: product.stock}));
-            notifyWarning(`Only ${product.stock} units of ${product.title} are available`);
-        }
         if (inputRef.current.value < 1) {
             dispatch(removeProductFromCart({id: product.id}));
         }
@@ -46,7 +39,6 @@ const CartProductCardInput = ({product}) => {
                         handleChangeProductQuantity(inputRef.current.value);
                         inputRef.current.blur();
                     }
-                    if (inputRef.current.value.length > 2) inputRef.current.value = inputRef.current.value = ''
                 }}
                 onBlur={() => {
                     handleChangeProductQuantity(inputRef.current.value)
