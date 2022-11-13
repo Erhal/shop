@@ -1,22 +1,35 @@
-import {useEffect, useRef} from "react";
+import {useEffect, useRef, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {changeProductQuantity, removeProductFromCart} from "../../../store/slices/cart";
-import checkIfOutOfStock from "../../../helpers/checkIfOutOfStock";
 
-const CartProductCardInput = ({product}) => {
+import {changeProductQuantity, removeProductFromCart} from "../../../store/slices/cart";
+
+import checkIfOutOfStock from "../../../helpers/checkIfOutOfStock";
+import showNotifyWarning from "../../../helpers/notify/showNotifyWarning";
+
+const CartProductCardInput = ({ product }) => {
     const {cart} = useSelector(state => state.cart);
+    const [productQuantity, setProductQuantity] = useState(product.quantity);
 
     const dispatch = useDispatch();
     const inputRef = useRef(null);
     const addBtnRef = useRef(null);
 
-    const handleChangeProductQuantity = (quantity) => {
-        dispatch(changeProductQuantity({product, quantity, inputRef}));
-    }
+    useEffect(() => {
+        if (productQuantity > product.stock) {
+            setProductQuantity(product.stock);
+            showNotifyWarning(`Only ${product.stock} units of ${product.title} are available`);
+        } else {
+            dispatch(changeProductQuantity({product, productQuantity}));
+            inputRef.current.value = productQuantity;
+        }
+    }, [productQuantity]);
+
+    useEffect(() => {
+        setProductQuantity(product.quantity);
+    }, [cart]);
 
     useEffect(() => {
         checkIfOutOfStock(cart, product, addBtnRef);
-        inputRef.current.value = product.quantity;
     }, [cart]);
 
     useEffect(() => {
@@ -28,7 +41,8 @@ const CartProductCardInput = ({product}) => {
     return (
         <div className="col-3 d-flex align-items-center">
             <div className='cursor-pointer me-1'
-                 onClick={() => handleChangeProductQuantity(product.quantity - 1)}>
+                 onClick={() => setProductQuantity(+productQuantity - 1)}
+            >
                 <span>-</span>
             </div>
             <input
@@ -36,12 +50,12 @@ const CartProductCardInput = ({product}) => {
                 ref={inputRef}
                 onKeyDown={(e) => {
                     if (e.key === 'Enter') {
-                        handleChangeProductQuantity(inputRef.current.value);
+                        setProductQuantity(+inputRef.current.value);
                         inputRef.current.blur();
                     }
                 }}
                 onBlur={() => {
-                    handleChangeProductQuantity(inputRef.current.value)
+                    setProductQuantity(+inputRef.current.value);
                     inputRef.current.blur();
                 }}
                 onFocus={() => inputRef.current.select()}
@@ -49,7 +63,7 @@ const CartProductCardInput = ({product}) => {
                 className="form-control form-control-sm text-center"
             />
             <div ref={addBtnRef} className='cursor-pointer ms-1'
-                 onClick={() =>handleChangeProductQuantity(product.quantity + 1)}
+                 onClick={() => setProductQuantity(+productQuantity + 1)}
             >
                 <span>+</span>
             </div>

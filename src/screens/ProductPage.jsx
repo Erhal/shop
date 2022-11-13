@@ -12,7 +12,7 @@ const ProductPage = () => {
     return (
         <>
             <Header/>
-            { isFetching && <div className='d-flex justify-content-center align-items-center residual-height__product-page'><SpinnerBorder/></div> }
+            { isFetching && <div className='d-flex justify-content-center align-items-center residual-height-product-page'><SpinnerBorder/></div> }
             { !isFetching && <ChosenProductCard product={chosenProduct}/> }
             { !isFetching && <ProductsSection id={id} numOfProducts={3} category={chosenProduct.category} productsIDsToFilter={[chosenProduct.id]}/> }
         </>

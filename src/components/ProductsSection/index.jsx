@@ -1,13 +1,16 @@
-import {useSelector} from "react-redux";
 import {useEffect, useState} from "react";
+import {useSelector} from "react-redux";
+
+import {useGetAllProductsQuery} from "../../store/api/products";
+
 import ProductCard from "../Cards/ProductCard";
 import SpinnerBorder from "../Spinners/SpinnerBorder";
+
 import filterProducts from "../../helpers/filterProducts";
-import {useGetAllProductsQuery} from "../../store/api/products";
 
 const ProductsSection = ({ numOfProducts, category, productsIDsToFilter }) => {
 
-    const { isFetching } = useGetAllProductsQuery(category, {refetchOnMountOrArgChange: true});
+    const { isFetching, isError } = useGetAllProductsQuery(category, {refetchOnMountOrArgChange: true});
     const {products} = useSelector(state => state.products);
 
     const [filteredProducts, setFilteredProducts] = useState([]);
@@ -19,7 +22,7 @@ const ProductsSection = ({ numOfProducts, category, productsIDsToFilter }) => {
 
     return (
         <>
-            {isFetching && <div className='d-flex justify-content-center align-items-center residual-height'><SpinnerBorder/></div>}
+            {(isFetching || isError) && <div className='d-flex justify-content-center align-items-center residual-height'><SpinnerBorder/></div>}
             {!isFetching &&
                 <section className="py-5">
                     <div className="container px-4 px-lg-5">

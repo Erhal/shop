@@ -1,11 +1,14 @@
 import {useEffect, useRef} from 'react';
 import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
+
+import {addProductToCart} from "../../../store/slices/cart";
+
 import checkIfOutOfStock from "../../../helpers/checkIfOutOfStock";
 import getProductRating from "../../../helpers/getProductRating";
+import showNotifySuccess from "../../../helpers/notify/showNotifySuccess";
+
 import './style.scss';
-import {addProductToCart} from "../../../store/slices/cart";
-import {toast} from "react-toastify";
 
 const ProductCard = ({product}) => {
 
@@ -14,8 +17,6 @@ const ProductCard = ({product}) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const addBtnRef = useRef();
-
-    const notifySuccess = (message) => toast.success(<div className='text-center text-dark'> {message} </div>);
 
     useEffect(() => {
         checkIfOutOfStock(cart, product, addBtnRef);
@@ -27,7 +28,7 @@ const ProductCard = ({product}) => {
 
     const handleAddProductToCart = () => {
         dispatch(addProductToCart({product, quantity: 1}));
-        notifySuccess(`${product.title} added to cart`);
+        showNotifySuccess(`${product.title} added to cart`);
     }
 
     return (

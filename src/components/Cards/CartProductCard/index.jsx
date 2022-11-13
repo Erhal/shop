@@ -1,13 +1,23 @@
-import CartProductCardInput from "./CartProductCardInput";
 import {useDispatch} from "react-redux";
-import {removeProductFromCart} from "../../../store/slices/cart";
-import addPriceSeparator from "../../../helpers/addPriceSeparator";
+import {useNavigate} from "react-router-dom";
 
-const CartProductCard = ({product}) => {
+import {removeProductFromCart} from "../../../store/slices/cart";
+
+import CartProductCardInput from "./CartProductCardInput";
+
+const CartProductCard = ({product, toggleCartBoxVisibility}) => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const handleRemoveProductFromCart = () => {
-        dispatch(removeProductFromCart({id: product.id}))
+        dispatch(removeProductFromCart({
+            id: product.id
+        }))
+    }
+
+    const handleNavigateToProductPage = () => {
+        navigate(`/product/${product.id}`)
+        if (toggleCartBoxVisibility) toggleCartBoxVisibility();
     }
 
     return (
@@ -25,16 +35,18 @@ const CartProductCard = ({product}) => {
                             style={{
                                 maxWidth: "90px",
                                 maxHeight: "90px",
+                                cursor: "pointer"
                             }}
+                            onClick={handleNavigateToProductPage}
                         />
                     </div>
                     <CartProductCardInput {...{product}} />
-                    <div className="col-5 text-center">
+                    <div className="col-5 text-center cursor-pointer" onClick={handleNavigateToProductPage}>
                         <h6 className="fw-normal mb-0 fw-semibold">{product.title.split(`${product.brand} `)[1] || product.title}</h6>
                         <div className='badge text-secondary mb-1 mx-auto'>
                             <span>({product.brand.toLowerCase().split(/\s+/)?.map(word => word[0].toUpperCase() + word.substring(1)).join(' ')})</span>
                         </div>
-                        <p className="mb-0 text-success">${addPriceSeparator(product.discountPrice * product.quantity)}</p>
+                        <p className="mb-0 text-success">${product.discountedPrice}</p>
                     </div>
                 </div>
             </div>

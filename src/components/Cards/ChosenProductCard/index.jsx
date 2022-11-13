@@ -1,10 +1,13 @@
 import {useEffect, useRef} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {addProductToCart} from "../../../store/slices/cart";
+
 import checkIfOutOfStock from "../../../helpers/checkIfOutOfStock";
 import getProductRating from "../../../helpers/getProductRating";
+import showNotifySuccess from "../../../helpers/notify/showNotifySuccess";
+import showNotifyWarning from "../../../helpers/notify/showNotifyWarning";
+
 import './style.scss';
-import {toast} from "react-toastify";
 
 const ChosenProductCard = ({ product }) => {
 
@@ -14,15 +17,13 @@ const ChosenProductCard = ({ product }) => {
     const addBtnRef = useRef();
     const dispatch = useDispatch();
 
-    const notifySuccess = (message) => toast.success(<div className='text-center text-dark'> {message} </div>);
-
     const handleAddProductToCart = () => {
-        const quantity = inputRef.current.value;
+        let quantity = inputRef.current.value;
         inputRef.current.value = 1;
 
         dispatch(addProductToCart({ product, quantity }))
-        notifySuccess(`${product.title} added to cart`);
-
+        showNotifySuccess(`${product.title} added to cart`);
+        if (quantity > product.stock) showNotifyWarning(`Only ${product.stock} units of ${product.title} are available`)
     }
 
     useEffect(() => {

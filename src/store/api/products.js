@@ -15,7 +15,7 @@ export const productsApi = createApi({
                     .map(product => {
                         return {
                             ...product,
-                            discountPrice: Math.round(product.price - (product.price * product.discountPercentage / 100))
+                            discountPrice: Math.ceil(product.price - (product.price * product.discountPercentage / 100))
                         }
                     })
             }
@@ -23,7 +23,7 @@ export const productsApi = createApi({
         getChosenProduct: builder.query({
             query: (id) => `products/${id}`,
             transformResponse: (product) => {
-                product.discountPrice = Math.round(product.price - (product.price * product.discountPercentage / 100));
+                product.discountPrice = Math.ceil(product.price - (product.price * product.discountPercentage / 100));
                 return product;
             }
         })

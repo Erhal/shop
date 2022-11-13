@@ -1,7 +1,7 @@
+import {useSelector} from "react-redux";
 import {Link} from "react-router-dom";
 
 import CartProductCard from "../Cards/CartProductCard";
-import {useSelector} from "react-redux";
 
 const CartBoxFull = ({ toggleCartBoxVisibility }) => {
     const {cart} = useSelector(state => state.cart);
@@ -14,7 +14,7 @@ const CartBoxFull = ({ toggleCartBoxVisibility }) => {
                         <div className="mb-4">
                             <h3 className="fw-normal mb-0 text-black">Shopping Cart</h3>
                         </div>
-                        {cart.products.map((product) => <CartProductCard key={product.id} product={product}/>)}
+                        {cart.products.map((product) => <CartProductCard key={product.id} {...{product, toggleCartBoxVisibility}}/>)}
                         <div className="row justify-content-between">
                             <div className="col-1"></div>
                             <div className="col-6 mb-4 d-flex align-items-center">

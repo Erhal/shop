@@ -1,23 +1,35 @@
 import {useEffect, useState} from 'react';
-import {Link, useNavigate} from "react-router-dom";
-import {toast} from "react-toastify";
+import {useNavigate} from "react-router-dom";
+import {useSelector} from "react-redux";
+
+import showNotifyInfo from "../../helpers/notify/showNotifyInfo";
 
 import CartProductCard from "../Cards/CartProductCard";
 import ProductsSection from "../ProductsSection";
-import {useSelector} from "react-redux";
+import AppModal from "../AppModal";
+import CheckoutForm from "../CheckoutForm";
 
 const Cart = () => {
-    const notifyInfo = (message) => toast.info(<div className='text-center text-dark'> {message} </div>);
 
     const {cart} = useSelector(state => state.cart);
     const {products} = useSelector(state => state.products);
     const [cartProductsIDs, setCartProductsIDs] = useState([]);
+    const [showModal, setShowModal] = useState(false);
+
     const navigate = useNavigate();
 
     useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'instant'
+        });
+    }, []);
+
+    useEffect(() => {
         if (cart.products.length === 0) {
-            navigate('/');
-            notifyInfo('Your cart is empty.');
+            // navigate('/'); TODO: uncomment this line
+            showNotifyInfo('Your cart is empty.');
         } else {
             setCartProductsIDs(cart.products.map(el => el.id));
         }
@@ -25,21 +37,24 @@ const Cart = () => {
 
     return (
         <>
+            <AppModal {...{showModal, setShowModal}}>
+                <CheckoutForm />
+            </AppModal>
             <div className='Cart d-flex flex-column justify-content-center my-5 mx-30pc'>
-                {cart.products.length > 0 && cart.products.map((product) => <CartProductCard key={product.id} product={product}/>)}
+                {!!cart.products.length && cart.products.map((product) =>
+                    <CartProductCard key={product.id} product={product}/>
+                )}
             </div>
 
-            <div className="row justify-content-between mb-5">
-                <div className="col-4"></div>
-                <div className="col-2 mb-4 d-flex align-items-center">
-                    <h5 className="fw-normal mb-0 text-black">Subtotal: ${cart.totalPrice}</h5>
-                </div>
-                <div className="col-2 mb-4 text-end">
-                    <Link to={'/cart'}>
-                        <button className="btn btn-secondary btn-block" type="button">BUY NOW</button>
-                    </Link>
-                </div>
-                <div className="col-4"></div>
+            <div className="row justify-content-center align-items-center mb-5 w-100">
+                <h5 className="col-2 fw-normal mb-0 text-black">Subtotal: ${cart.totalPrice}</h5>
+                <button
+                    className="col-2 btn btn-secondary btn-block"
+                    type="button"
+                    onClick={() => setShowModal(true)}
+                >
+                    Proceed to checkout
+                </button>
             </div>
 
             <div className="container">
