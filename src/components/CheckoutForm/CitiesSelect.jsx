@@ -1,11 +1,23 @@
 import AsyncSelect from "react-select/async";
 import {Controller} from "react-hook-form";
-import {useState} from "react";
+import {useRef, useState} from "react";
 import Form from "react-bootstrap/Form";
 
-const CitiesSelect = ({control, name}) => {
+const CitiesSelect = ({control, name, error}) => {
 
     const [citiesArr, setCitiesArr] = useState([]);
+    const inputRef = useRef()
+
+    const selectStyles = {
+        control: (base, state) => ({
+            ...base,
+            borderRadius: '0.375rem',
+            borderColor: error ? state.isFocused ? '#dc3545' : '#dc3545' : state.isFocused ? '#80bdff' : '#ced4da',
+            boxShadow: state.isFocused ? error ? '0 0 0 0.25rem rgba(220,53,69,.25)' : '0 0 0 0.25rem rgba(13, 110, 253, 0.25)' : 'none',
+            '&:hover': {
+            },
+        })
+    }
 
     const loadOptions = async (inputValue, callback) => {
         try {
@@ -47,15 +59,18 @@ const CitiesSelect = ({control, name}) => {
                     return citiesArr.some(el => el.value === value)
                 }
             }}
-            render={({field: {value, onChange}, fieldState: {error}}) => (
+            render={({field: {value, onChange, onBlur}, fieldState: {error}}) => (
                 <>
                     <AsyncSelect
+                        styles={selectStyles}
+                        ref={inputRef}
                         cacheOptions
                         placeholder={'Select city'}
                         loadOptions={loadOptions}
                         noOptionsMessage={() => 'Start typing...'}
                         value={citiesArr.find(el => el.value === value)}
                         onChange={newValue => onChange(newValue.value)}
+                        onBlur={onBlur}
                     />
                     <Form.Text className="text-danger">
                         {error?.message || <div className='mt-4'/>}

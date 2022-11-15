@@ -46,10 +46,13 @@ export const cartSlice = createSlice({
             } else {
                 state.cart.products.find(el => el.id === product.id).quantity = +productQuantity;
             }
+        },
+        deleteCart: (state) => {
+            state.cart = initialState.cart;
         }
     }
 });
 
-export const { updateCartParams, addProductToCart, removeProductFromCart, changeProductQuantity } = cartSlice.actions;
+export const { updateCartParams, addProductToCart, removeProductFromCart, changeProductQuantity, deleteCart } = cartSlice.actions;
 
 export default cartSlice.reducer;

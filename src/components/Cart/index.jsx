@@ -28,7 +28,7 @@ const Cart = () => {
 
     useEffect(() => {
         if (cart.products.length === 0) {
-            // navigate('/'); TODO: uncomment this line
+            navigate('/');
             showNotifyInfo('Your cart is empty.');
         } else {
             setCartProductsIDs(cart.products.map(el => el.id));
