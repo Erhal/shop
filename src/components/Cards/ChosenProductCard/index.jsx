@@ -21,8 +21,12 @@ const ChosenProductCard = ({ product }) => {
         let quantity = inputRef.current.value;
         inputRef.current.value = 1;
 
-        dispatch(addProductToCart({ product, quantity }))
-        showNotifySuccess(`${product.title} added to cart`);
+        if (+quantity > 0) {
+            dispatch(addProductToCart({ product, quantity }))
+            showNotifySuccess(`${product.title} added to cart`);
+        } else {
+            showNotifyWarning('Invalid quantity');
+        }
         if (quantity > product.stock) showNotifyWarning(`Only ${product.stock} units of ${product.title} are available`)
     }
 
