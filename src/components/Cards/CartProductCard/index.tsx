@@ -47,10 +47,10 @@ const CartProductCard: FC<ICartProductCardProps> = ({product, toggleCartBoxVisib
                         />
                     </div>
                     <CartProductCardInput {...{product}} />
-                    <div className="col-5 text-center cursor-pointer" onClick={handleNavigateToProductPage}>
+                    <div className="col-4 me-2 text-center cursor-pointer" onClick={handleNavigateToProductPage}>
                         <h6 className="fw-normal mb-0 fw-semibold">{product.title.split(`${product.brand} `)[1] || product.title}</h6>
                         <div className='badge text-secondary mb-1 mx-auto'>
-                            <span>({product.brand.toLowerCase().split(/\s+/)?.map(word => word[0].toUpperCase() + word.substring(1)).join(' ')})</span>
+                            {/*<span>({product.brand.toLowerCase().split(/\s+/)?.map(word => word[0].toUpperCase() + word.substring(1)).join(' ')})</span>*/}
                         </div>
                         <p className="mb-0 text-success">${addPriceSeparator(product.discountPrice * product.quantity)}</p>
                     </div>

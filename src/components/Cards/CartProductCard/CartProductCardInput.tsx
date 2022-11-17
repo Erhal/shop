@@ -39,7 +39,7 @@ const CartProductCardInput: FC<ICartProductCardInputProps> = ({product}) => {
     }, [cart]);
 
     return (
-        <div className="col-3 d-flex align-items-center">
+        <div className="col-3 ms-3 d-flex align-items-center">
             <div className='cursor-pointer me-1'
                  onClick={() => setProductQuantity(productQuantity - 1)}
             >
