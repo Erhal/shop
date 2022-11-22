@@ -1,8 +1,6 @@
-import AllProducts from "./AllProducts";
-import Smartphones from "./Smartphones";
-import Laptops from "./Laptops";
-import ProductPage from "./ProductPage";
-import CartPage from "./CartPage";
-import Page404 from "./Page404";
-
-export {AllProducts, Smartphones, Laptops, ProductPage, CartPage, Page404};
+export {default as AllProducts} from './AllProducts'
+export {default as Smartphones} from './Smartphones'
+export {default as Laptops} from './Laptops'
+export {default as ProductPage} from './ProductPage'
+export {default as CartPage} from './CartPage'
+export {default as Page404} from './Page404'
